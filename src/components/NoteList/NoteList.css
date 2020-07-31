@@ -1,0 +1,70 @@
+.noteList {
+    background-color: #EDF2F4;
+    height: 100%;
+  }
+
+.noteContainer {
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  border-left: 5px solid #EDF2F4;
+  flex-wrap: wrap;
+  border: 1px solid #B4C7CE;
+  border-top: 0;
+}
+
+.noteContainer.selected {
+  background-color: white;
+  border-left: 5px solid red;
+}
+
+.noteCategory {
+  color: #A9A9A9;
+  font-family: "Poppins";
+  font-size: .75rem;
+  font-weight: 700;
+  text-align: center;
+  height: 100%;
+  padding: 0 6%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.noteContainer.selected .noteCategory{
+  color: #6E6E6E;
+}
+
+.noteContainer.selected .noteCategory i {
+  color: #EF233C;
+}
+
+.noteTitle {
+  color: #A9A9A9;
+  font-family: "Poppins";
+  font-weight: 700;
+  flex: 0 0 20%;
+  margin: 6% 0 0 0;
+  min-width: 0;
+  max-width: 80%;
+  display: flex;
+  align-items: center;
+}
+
+.noteContainer.selected .noteTitle {
+  color: #3F3F3F;
+}
+
+.noteContent {
+  color: #A9A9A9;
+  font-family: "Poppins";
+  font-size: .80rem;
+  flex: 0 0 50%;
+  max-width: 75%;
+  display: flex;
+  align-items: center;
+}
+
+.noteContainer.selected .noteContent{
+  color: #3F3F3F;
+}
