@@ -9,24 +9,23 @@ function NoteList() {
 
     const [selectedNote, setSelectedNote] = useState(1);
 
-    const buildNoteList = (item) => {
-        return <ListItem click={handleClick} key={item.key} id={item.id} title={item.title} selected={selectedNote} content={item.content}/>
-    }
-
-    const handleClick = (event) => {
-        const clickedItem = event.target.id;
-        console.log(`Selected: ${selectedNote}`);
-        console.log(`ID: ${clickedItem}`);
-        setSelectedNote(clickedItem);
-    }
-
     return (
         <div className="noteList">
             <Grid container>
-                {noteList.map(buildNoteList)}
+                {noteList.map(item => (
+                    <ListItem 
+                        key={item}
+                        content={item.content}
+                        id={item.id} 
+                        title={item.title} 
+                        active={item === selectedNote}
+                        click={() => setSelectedNote(item)} 
+                    />
+                ))}
             </Grid>
         </div>
     );
 }
+
 
 export default NoteList;
