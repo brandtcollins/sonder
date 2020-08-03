@@ -3,11 +3,11 @@ import './Sidebar.css';
 import SidebarLink from "./SidebarLink/SidebarLink";
 import Avatar from "../Avatar/Avatar";
 import Categories from './Categories/Categories';
-import { Row } from 'react-bootstrap'
+import { Row, Col } from 'react-bootstrap'
 
 function Sidebar(){
     return (
-        <div className="sidebar">
+        <Col xs={2} className="sidebar">
             <Avatar />
             <Row>
                 <p>NOTES</p>
@@ -23,7 +23,7 @@ function Sidebar(){
                 <p>SIGN UP</p>
                 <p>REGISTER</p> 
             </Row>
-        </div>
+        </Col>
     );
 }
 

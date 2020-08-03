@@ -1,20 +1,35 @@
 import React from "react";
 import "./Note.css"
+import { Col, Row } from "react-bootstrap";
 
 function Note(){
     const noteFiller = `Shores of the cosmic ocean radio telescope bits of moving fluff cosmic fugue Sea of Tranquility billions upon billions. Two ghostly white figures in coveralls and helmets are softly dancing invent the universe as a patch of light trillion tingling of the spine network of wormholes? With pretty stories for which there's little good evidence emerged into consciousness two ghostly white figures in coveralls and helmets are softly dancing a still more glorious dawn awaits hundreds of thousands are creatures of the cosmos.`
     
     return (
-        <div className="Note">
-            <input 
-                className="NoteHeadline" 
-                placeholder="A new note title goes here."
-            />
-            <textarea
-                className="NoteBody"
-                placeholder={noteFiller}  
-            />
-        </div>
+        <Col xs={6} className="note">
+            <Row>
+                <Col xs={10}>
+                    <div>
+                        <input 
+                            className="noteHeadline" 
+                            placeholder="A new note title goes here."
+                        />
+                        <textarea
+                            className="noteBody"
+                            placeholder={noteFiller}  
+                        />
+                    </div>
+                </Col>
+                <Col xs={1}>
+                    <div className="noteNav">
+                        <ul>
+                            <li><i class="fas fa-check-square"></i></li>
+                            <li><i class="fas fa-trash"></i></li>
+                        </ul>
+                    </div>
+                </Col>
+            </Row>
+        </Col>
     )
 }
 

@@ -1,19 +1,32 @@
-.Note {
-    padding: 2.5rem 2.5rem 2.5rem 3.5rem;
+.note.col-6 {
+    padding: 3.5rem 0 0 3.5rem;
 }
 
-.NoteHeadline {
+.noteHeadline {
     font-size: 22px;
     margin: 0 0 1.5rem 0;
     width: 100%;
     border: none;
 }
 
-.NoteBody {
+.noteBody {
     width: 100%;
     border: none;
     height: 50rem;
     outline: none;
     resize: none;
+}
 
+.noteNav {
+    color: #E4E4E4;
+    font-size: 1.5rem;
+}
+
+.noteNav i:hover {
+    color: red;
+    font-size: 1.5rem;
+}
+
+.noteNav ul{
+    list-style: none;
 }
