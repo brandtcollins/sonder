@@ -10,7 +10,7 @@ function ListItem(props){
     return (
         <Col className={props.active ? 'noteContainer selected' : 'noteContainer'}>
             <Row>
-                <Col onClick={props.click} id={props.id} className="noteCategory " xs={2}><p>15D<br/><i className="fas fa-paw"></i></p></Col>
+                <Col onClick={props.click} id={props.id} className="noteCategory " xs={2}><p>15D<br/><i className={"fas " + props.icon}></i></p></Col>
                 <Col>
                     <p onClick={props.click} id={props.id} className="noteTitle ">{title.substring(0, 60) + '...'}</p>
                     <p onClick={props.click} id={props.id} className="noteContent ">{content.substring(0, 100) + '...'}</p>

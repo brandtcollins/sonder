@@ -1,25 +1,25 @@
 import React from 'react';
 import './NoteList.css';
 import ListItem from './NoteListItem/NoteListItem';
-import noteList from './NoteListFiller';
-import { useState } from 'react';
+// import { useState } from 'react';
 import { Col } from 'react-bootstrap'
 
 
-function NoteList() {
+function NoteList(props) {
 
-    const [selectedNote, setSelectedNote] = useState(1);
+    const noteList = props.notes;
 
     return (
         <Col className="noteList">
-            {noteList.map(item => (
+            {noteList.map((item, index) => (
                 <ListItem 
-                    key={item}
+                    key={index}
                     content={item.content}
-                    id={item.id} 
+                    id={index} 
+                    icon={item.icon}
                     title={item.title} 
-                    active={item === selectedNote}
-                    click={() => setSelectedNote(item)} 
+                    active={item === props.selectedNote}
+                    click={() => props.setSelectedNote(item)} 
                 />
             ))}
         </Col>
