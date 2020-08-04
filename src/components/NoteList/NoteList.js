@@ -1,8 +1,7 @@
 import React from 'react';
 import './NoteList.css';
 import ListItem from './NoteListItem/NoteListItem';
-// import { useState } from 'react';
-import { Col } from 'react-bootstrap'
+import { Col } from 'react-bootstrap';
 
 
 function NoteList(props) {
@@ -19,7 +18,7 @@ function NoteList(props) {
                     icon={item.icon}
                     title={item.title} 
                     active={item === props.selectedNote}
-                    click={() => props.setSelectedNote(item)} 
+                    click={() => props.setSelectedNote(item, index)} 
                 />
             ))}
         </Col>
