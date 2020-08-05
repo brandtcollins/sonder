@@ -4,9 +4,13 @@ import categoryList from "./CategoryList";
 
 
 function Categories(){
+
+    let uniqid = require('uniqid');
+    
+
     function buildCategoryList(item){
         return (
-            <SidebarLink key={item.key} icon={item.icon} name={item.name} />
+            <SidebarLink key={uniqid()} icon={item.icon} name={item.name} />
         );
     }
 

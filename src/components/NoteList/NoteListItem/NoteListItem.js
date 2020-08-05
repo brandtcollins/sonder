@@ -2,7 +2,7 @@ import React from 'react';
 import '../NoteList.css';
 import { Col, Row } from 'react-bootstrap';
 
-function ListItem(props){
+const ListItem = (props) => {
 
     const title = props.title;
     const content = props.content;

@@ -5,7 +5,8 @@ import Avatar from "../Avatar/Avatar";
 import Categories from './Categories/Categories';
 import { Row, Col } from 'react-bootstrap'
 
-function Sidebar(){
+const Sidebar = () => {
+
     return (
         <Col xs={2} className="sidebar">
             <Avatar />

@@ -3,13 +3,9 @@ import SidebarLink from "../SidebarLink/SidebarLink";
 import categoryList from "../../categoryList";
 import { Typography  } from '@material-ui/core';
 
-
-function Categories(){
-    function buildCategoryList(item){
-        return (
-            <SidebarLink key={item.key} icon={item.icon} name={item.name} />
-        );
-    }
+const Categories = () => {
+    
+    const buildCategoryList = item => <SidebarLink key={item.key} icon={item.icon} name={item.name} />
 
     return (
         <div>

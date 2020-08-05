@@ -4,7 +4,7 @@ import ListItem from './NoteListItem/NoteListItem';
 import { Col } from 'react-bootstrap';
 
 
-function NoteList(props) {
+const NoteList = (props) => {
 
     const noteList = props.notes;
 
@@ -12,9 +12,9 @@ function NoteList(props) {
         <Col className="noteList">
             {noteList.map((item, index) => (
                 <ListItem 
-                    key={index}
                     content={item.content}
-                    id={index} 
+                    id={item.id}
+                    key={item.id}
                     icon={item.icon}
                     title={item.title} 
                     active={item === props.selectedNote}
