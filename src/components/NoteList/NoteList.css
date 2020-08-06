@@ -43,6 +43,7 @@
   font-weight: 700;
   align-items: center;
   margin: 0;
+  overflow-wrap: break-word;
 }
 
 .noteContainer.selected .noteTitle {
@@ -56,6 +57,7 @@
   font-size: .80rem;
   align-items: center;
   margin: 0;
+  overflow-wrap: break-word;
 }
 
 .noteContainer.selected .noteContent{

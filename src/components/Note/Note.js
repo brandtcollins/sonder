@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./Note.css"
 import { Col, Row } from "react-bootstrap";
+import Tooltip from 'react-bootstrap/Tooltip'
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 
 let uniqid = require('uniqid');
 
@@ -36,6 +38,19 @@ const Note = (props) => {
         event.preventDefault();
     }
 
+    const submitNoteTooltip = (props) => (
+        <Tooltip id="button-tooltip" {...props}>
+          Submit Note
+        </Tooltip>
+      );
+
+    const deleteNoteTooltip = (props) => (
+      <Tooltip id="button-tooltip" {...props}>
+        Delete Note
+      </Tooltip>
+    );
+      
+
     return (
         <Col xs={6} className="note">
             <Row>
@@ -45,7 +60,7 @@ const Note = (props) => {
                             className="noteHeadline" 
                             name="title"
                             placeholder="A new note title goes here."
-                            value={props.titleValue}
+                            value={note.title}
                             onChange={handleChange}
                             wrap="hard"
                             rows="3"
@@ -54,16 +69,23 @@ const Note = (props) => {
                             className="noteBody"
                             name="content"
                             placeholder={noteFiller}  
-                            value={props.contentValue}
+                            value={note.content}
                             onChange={handleChange}
                         />
                     </div>
                 </Col>
-                <Col xs={1}>
+                <Col xs={2}>
                     <div className="noteNav">
                         <ul>
-                            <li><button onClick={submitNote}><i className="fas fa-check-square"></i></button></li>
-                            <li><i className="fas fa-trash"></i></li>
+                            <li><OverlayTrigger placement="left" delay={{ show: 250, hide: 400 }} overlay={submitNoteTooltip} >
+                                    <button onClick={submitNote}><i className="fas fa-check-square" variant="success" /></button>
+                                </OverlayTrigger>
+                            </li>
+                            <li>
+                                <OverlayTrigger placement="left" delay={{ show: 250, hide: 400 }} overlay={deleteNoteTooltip} >
+                                    <i className="fas fa-trash"></i>
+                                </OverlayTrigger>
+                            </li>
                         </ul>
                     </div>
                 </Col>
