@@ -1,5 +1,5 @@
 import React from 'react';
-import '../NoteList.css';
+import styles from '../NoteList.module.css';
 import { Col, Row } from 'react-bootstrap';
 
 const ListItem = (props) => {
@@ -8,12 +8,12 @@ const ListItem = (props) => {
     const content = props.content;
 
     return (
-        <Col className={props.active ? 'noteContainer selected' : 'noteContainer'}>
+        <Col className={props.active ? [styles.selected, styles.noteContainer] : styles.noteContainer }>
             <Row>
-                <Col onClick={props.click} id={props.id} className="noteCategory " xs={2}><p>15D<br/><i className={"fas " + props.icon}></i></p></Col>
+                <Col onClick={props.click} id={props.id} className={styles.noteCategory} xs={2}><p>15D<br/><i className={"fas " + props.icon}></i></p></Col>
                 <Col>
-                    <p onClick={props.click} id={props.id} className="noteTitle ">{title.substring(0, 60) + '...'}</p>
-                    <p onClick={props.click} id={props.id} className="noteContent ">{content.substring(0, 100) + '...'}</p>
+                    <p onClick={props.click} id={props.id} className={styles.noteTitle} >{title.substring(0, 60) + '...'}</p>
+                    <p onClick={props.click} id={props.id} className={styles.noteContent}>{content.substring(0, 100) + '...'}</p>
                 </Col>
             </Row>
         </Col>

@@ -10,7 +10,7 @@
   padding: 1.5rem 0;
 }
 
-.noteContainer.selected {
+.selected {
   background-color: white;
   border-left: 5px solid red;
 }
@@ -27,11 +27,11 @@
   align-items: center;
 }
 
-.noteContainer.selected .noteCategory{
+.selected .noteCategory{
   color: #6E6E6E;
 }
 
-.noteContainer.selected .noteCategory i {
+.selected .noteCategory i {
   color: #EF233C;
 }
 
@@ -46,7 +46,7 @@
   overflow-wrap: break-word;
 }
 
-.noteContainer.selected .noteTitle {
+.selected .noteTitle {
   color: #3F3F3F;
 }
 
@@ -60,6 +60,6 @@
   overflow-wrap: break-word;
 }
 
-.noteContainer.selected .noteContent{
+.selected .noteContent{
   color: #3F3F3F;
 }

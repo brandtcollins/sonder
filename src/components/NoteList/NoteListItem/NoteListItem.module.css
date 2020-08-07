@@ -1,0 +1,48 @@
+.noteCategory {
+    color: #A9A9A9;
+    font-family: "Poppins";
+    font-size: .75rem;
+    font-weight: 700;
+    height: 100;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .selected .noteCategory{
+    color: #6E6E6E;
+  }
+  
+  .selected .noteCategory i {
+    color: #EF233C;
+  }
+  
+  
+  .noteTitle {
+    width: 95%;
+    color: #A9A9A9;
+    font-family: "Poppins";
+    font-weight: 700;
+    align-items: center;
+    margin: 0;
+    overflow-wrap: break-word;
+  }
+  
+  .selected .noteTitle {
+    color: #3F3F3F;
+  }
+  
+  .noteContent {
+    width: 95%;
+    color: #A9A9A9;
+    font-family: "Poppins";
+    font-size: .80rem;
+    align-items: center;
+    margin: 0;
+    overflow-wrap: break-word;
+  }
+  
+  .selected .noteContent{
+    color: #3F3F3F;
+  }

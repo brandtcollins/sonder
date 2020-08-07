@@ -6,7 +6,6 @@ import categoryList from "./CategoryList";
 function Categories(){
 
     let uniqid = require('uniqid');
-    
 
     function buildCategoryList(item){
         return (

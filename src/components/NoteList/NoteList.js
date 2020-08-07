@@ -1,5 +1,5 @@
 import React from 'react';
-import './NoteList.css';
+import styles from './NoteList.module.css';
 import ListItem from './NoteListItem/NoteListItem';
 import { Col } from 'react-bootstrap';
 
@@ -9,7 +9,7 @@ const NoteList = (props) => {
     const noteList = props.notes;
 
     return (
-        <Col className="noteList">
+        <Col className={styles.noteList}>
             {noteList.map((item, index) => (
                 <ListItem 
                     content={item.content}
