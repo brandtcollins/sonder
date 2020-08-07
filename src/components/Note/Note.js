@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Note.css"
+import styles from "./Note.module.css"
 import { Col, Row } from "react-bootstrap";
 import Tooltip from 'react-bootstrap/Tooltip'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
@@ -52,12 +52,12 @@ const Note = (props) => {
       
 
     return (
-        <Col xs={6} className="note">
+        <Col xs={6} className={[styles.note, styles.col]}>
             <Row>
                 <Col xs={10}>
                     <div>
                         <textarea 
-                            className="noteHeadline" 
+                            className={styles.noteHeadline} 
                             name="title"
                             placeholder="A new note title goes here."
                             value={note.title}
@@ -66,7 +66,7 @@ const Note = (props) => {
                             rows="3"
                         />
                         <textarea
-                            className="noteBody"
+                            className={styles.noteBody}
                             name="content"
                             placeholder={noteFiller}  
                             value={note.content}
@@ -75,7 +75,7 @@ const Note = (props) => {
                     </div>
                 </Col>
                 <Col xs={2}>
-                    <div className="noteNav">
+                    <div className={styles.noteNav}>
                         <ul>
                             <li><OverlayTrigger placement="left" delay={{ show: 250, hide: 400 }} overlay={submitNoteTooltip} >
                                     <button onClick={submitNote}><i className="fas fa-check-square" variant="success" /></button>
