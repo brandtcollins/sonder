@@ -47,7 +47,7 @@ function App() {
       <Container fluid>
         <Row>
           <Sidebar />
-          <NoteList notes={notes} id={notes.id} selectedNote={selectedNote} setSelectedNote={handleClick}  />
+          <NoteList onAdd={addNote} notes={notes} id={notes.id} selectedNote={selectedNote} setSelectedNote={handleClick}  />
           <Note onAdd={addNote} titleValue={selectedNote.title} contentValue={selectedNote.content} />
         </Row>
       </Container>
