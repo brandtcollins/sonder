@@ -2,7 +2,10 @@
     padding: 50px 0 0 75px ;
 }
 
-.noteHeadline {
+.noteHeadline:disabled {
+    font-family: Poppins;
+    font-weight: 700;
+    background-color: white;
     font-size: 22px;
     margin: 0 0 1.5rem 0;
     width: 100%;
@@ -11,7 +14,22 @@
     overflow: hidden;
 }
 
-.noteBody {
+.noteHeadline {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: white;
+    font-size: 22px;
+    font-weight: bolder;
+    margin: 0 0 1.5rem 0;
+    width: 100%;
+    border: none;
+    resize: none;
+    overflow: hidden;
+    border: 1px solid #E4E4E4;
+}
+
+.noteBody:disabled {
+    background-color: white;
+    font-family: Poppins;
     width: 100%;
     border: none;
     height: 50rem;
@@ -19,12 +37,14 @@
     resize: none;
 }
 
-.noteHeadline:focus {
+.noteBody {
+    font-family: 'Courier New', Courier, monospace;
+    width: 100%;
+    border: none;
+    height: 50rem;
+    outline: none;
     border: 1px solid #E4E4E4;
-}
-
-.noteBody:focus {
-    border: 1px solid #E4E4E4;
+    resize: none;
 }
 
 .noteNav {

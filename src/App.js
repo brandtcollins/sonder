@@ -40,7 +40,7 @@ function App() {
   //Click event handler to change styles on list items.
   const handleClick = (item, index) => {
     setSelectedNote(item)
-    console.log(selectedNote);
+    console.log(selectedNote.title);
   }
 
   return (
