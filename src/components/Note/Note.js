@@ -5,10 +5,10 @@ import Tooltip from 'react-bootstrap/Tooltip'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 
 let uniqid = require('uniqid');
-
+const submitNoteTooltip = (props) => <Tooltip id="button-tooltip" {...props}>Edit Note</Tooltip>;
+const deleteNoteTooltip = (props) => <Tooltip id="button-tooltip" {...props}>Delete Note</Tooltip>;
 
 const Note = (props) => {
-    // const noteFiller = `Shores of the cosmic ocean radio telescope bits of moving fluff cosmic fugue Sea of Tranquility billions upon billions. Two ghostly white figures in coveralls and helmets are softly dancing invent the universe as a patch of light trillion tingling of the spine network of wormholes? With pretty stories for which there's little good evidence emerged into consciousness two ghostly white figures in coveralls and helmets are softly dancing a still more glorious dawn awaits hundreds of thousands are creatures of the cosmos.`
 
     const [note, setNote] = useState({
         id: uniqid(),
@@ -46,23 +46,11 @@ const Note = (props) => {
         setNote({
             id: uniqid(),
             icon: "fa-paw",
-            title: props.titleValue,
-            content: props.contentValue
+            title: note.title,
+            content: note.content
         });
         event.preventDefault();
     }
-
-    const submitNoteTooltip = (props) => (
-        <Tooltip id="button-tooltip" {...props}>
-          Edit Note
-        </Tooltip>
-      );
-
-    const deleteNoteTooltip = (props) => (
-      <Tooltip id="button-tooltip" {...props}>
-        Delete Note
-      </Tooltip>
-    );
       
     return (
         <Col xs={6} className={[styles.note, styles.col]}>
@@ -93,12 +81,12 @@ const Note = (props) => {
                     <div className={styles.noteNav}>
                         <ul>
                             <li>
-                                <OverlayTrigger placement="left" delay={{ show: 250, hide: 400 }} overlay={submitNoteTooltip} >
+                                <OverlayTrigger placement="left" delay={{ show: 250, hide: 400 }} overlay={submitNoteTooltip}>
                                     <button onClick={handleClick}><i className="fas fa-edit" variant="success" /></button>
                                 </OverlayTrigger>
                             </li>
                             <li>
-                                <OverlayTrigger placement="left" delay={{ show: 250, hide: 400 }} overlay={deleteNoteTooltip} >
+                                <OverlayTrigger placement="left" delay={{ show: 250, hide: 400 }} overlay={deleteNoteTooltip}>
                                     <i className="fas fa-trash"></i>
                                 </OverlayTrigger>
                             </li>

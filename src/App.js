@@ -37,6 +37,14 @@ function App() {
     });
   }
 
+
+  // //Edit function to submit an edit on a already existing note
+  // const handleEdit = (id) => {
+  //   SetNotes(prevNotes => {
+  //     console.log(prevNotes)
+  //   })
+  // }
+
   //Click event handler to change styles on list items.
   const handleClick = (item, index) => {
     setSelectedNote(item)
@@ -47,7 +55,7 @@ function App() {
       <Container fluid>
         <Row>
           <Sidebar />
-          <NoteList onAdd={addNote} notes={notes} id={notes.id} selectedNote={selectedNote} setSelectedNote={handleClick}  />
+          <NoteList onAdd={addNote} notes={notes} id={notes.id} selectedNote={selectedNote} setSelectedNote={handleClick} />
           <Note onAdd={addNote} titleValue={selectedNote.title} contentValue={selectedNote.content} />
         </Row>
       </Container>
