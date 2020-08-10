@@ -28,7 +28,6 @@ const NoteList = (props) => {
         event.preventDefault();
     }
 
-
     return (
         <Col className={styles.noteList}>
         <RoundButton text="Create a new note" onClick={submitNote} />
@@ -46,6 +45,5 @@ const NoteList = (props) => {
         </Col>
     );
 }
-
 
 export default NoteList;

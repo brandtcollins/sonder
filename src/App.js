@@ -29,14 +29,12 @@ function App() {
   //useState Hook for note list items to reference in knowing which item is selected
   const [selectedNote, setSelectedNote] = useState(notes[0]);
 
-
   // Add note function to submit a new note from user
   const addNote = (newNote) => {
     SetNotes(prevNotes => {
       return [...prevNotes, newNote];
     });
   }
-
 
   // //Edit function to submit an edit on a already existing note
   // const handleEdit = (id) => {
