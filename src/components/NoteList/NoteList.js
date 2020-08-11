@@ -39,7 +39,7 @@ const NoteList = (props) => {
                     icon={item.icon}
                     title={item.title} 
                     active={item === props.selectedNote}
-                    click={() => props.setSelectedNote(item, index)} 
+                    click={() => props.setSelectedNote(item, index)}
                 />
             ))}
         </Col>

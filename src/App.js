@@ -11,7 +11,7 @@ function App() {
   let uniqid = require('uniqid');
 
   //useState Hook for Note input to create new item in the notelist
-  const [notes, SetNotes] = useState([
+  const [notes, setNotes] = useState([
     {
       id: uniqid(),
       icon: "fa-briefcase",
@@ -21,7 +21,7 @@ function App() {
     {
       id: uniqid(),
       icon: "fa-code",
-      title: "Across the centuries extraordinary claims require extraordinary evidence vastness is bearable only through love",
+      title: "This is the second note, click to open and edit this note",
       content: "Something incredible is waiting to be known vastness is bearable only through love dispassionate extraterrestrial observer and billions upon billions upon billions upon billions upon billions upon billions upon billions"
     },
   ]);
@@ -31,10 +31,22 @@ function App() {
 
   // Add note function to submit a new note from user
   const addNote = (newNote) => {
-    SetNotes(prevNotes => {
+    setNotes(prevNotes => {
       return [...prevNotes, newNote];
     });
   }
+
+  // Edit Note 
+  const submitEdit = (event) => {
+    // props.onAdd(note);
+    // setNote({
+    //     id: uniqid(),
+    //     icon: "fa-paw",
+    //     title: note.title,
+    //     content: note.content
+    // });
+    event.preventDefault();
+}
 
   // //Edit function to submit an edit on a already existing note
   // const handleEdit = (id) => {
@@ -43,18 +55,31 @@ function App() {
   //   })
   // }
 
+  //Delete Note
+  const deleteNote = (id) => {
+    setNotes(prevNotes => {
+      return prevNotes.filter((noteItem, index) => {
+        return noteItem.id !== id;
+      })
+    })
+  }
+
   //Click event handler to change styles on list items.
   const handleClick = (item, index) => {
     setSelectedNote(item)
-    console.log(selectedNote.title);
   }
 
   return (
       <Container fluid>
         <Row>
           <Sidebar />
-          <NoteList onAdd={addNote} notes={notes} id={notes.id} selectedNote={selectedNote} setSelectedNote={handleClick} />
-          <Note onAdd={addNote} titleValue={selectedNote.title} contentValue={selectedNote.content} />
+          <NoteList onAdd={addNote} notes={notes} selectedNote={selectedNote} setSelectedNote={handleClick} />
+          <Note onAdd={addNote} 
+                submitEdit={submitEdit} 
+                deleteNote={deleteNote} 
+                titleValue={selectedNote.title} 
+                contentValue={selectedNote.content} 
+                noteID={selectedNote.id} />
         </Row>
       </Container>
   );

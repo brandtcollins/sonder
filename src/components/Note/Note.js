@@ -5,8 +5,10 @@ import Tooltip from 'react-bootstrap/Tooltip'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 
 let uniqid = require('uniqid');
-const submitNoteTooltip = (props) => <Tooltip id="button-tooltip" {...props}>Edit Note</Tooltip>;
+const editNoteTooltip = (props) => <Tooltip id="button-tooltip" {...props}>Edit Note</Tooltip>;
 const deleteNoteTooltip = (props) => <Tooltip id="button-tooltip" {...props}>Delete Note</Tooltip>;
+const submitNoteTooltip = (props) => <Tooltip id="button-tooltip" {...props}>Submit Note</Tooltip>;
+
 
 const Note = (props) => {
 
@@ -17,7 +19,7 @@ const Note = (props) => {
         content: ""
     });
 
-    const [disabledField, setDisabledField] = useState(true);
+    const [disabledNoteFields, setDisabledNoteFields] = useState(true);
 
     const handleChange = (event) => {
         const {name, value} = event.target;
@@ -31,25 +33,11 @@ const Note = (props) => {
     }
 
     const handleClick = (event) => {
-        if (disabledField) {
-            setDisabledField(false)
-            console.log(disabledField);
-        } else if (!disabledField) {
-            setDisabledField(true)
-            submitEdit(event)
-            console.log(disabledField);
+        if (disabledNoteFields) {
+            setDisabledNoteFields(false)
+        } else if (!disabledNoteFields) {
+            setDisabledNoteFields(true)
         }
-    }
-    
-    const submitEdit = (event) => {
-        props.onAdd(note);
-        setNote({
-            id: uniqid(),
-            icon: "fa-paw",
-            title: note.title,
-            content: note.content
-        });
-        event.preventDefault();
     }
       
     return (
@@ -65,7 +53,7 @@ const Note = (props) => {
                             onChange={handleChange}
                             wrap="hard"
                             rows="3"
-                            disabled= {disabledField ? true : false}
+                            disabled= {disabledNoteFields ? true : false}
                         />
                         <textarea
                             className={styles.noteBody}
@@ -73,7 +61,7 @@ const Note = (props) => {
                             placeholder={props.contentValue}  
                             value={note.content}
                             onChange={handleChange}
-                            disabled= {disabledField ? true : false}
+                            disabled= {disabledNoteFields ? true : false}
                         />
                     </div>
                 </Col>
@@ -81,13 +69,13 @@ const Note = (props) => {
                     <div className={styles.noteNav}>
                         <ul>
                             <li>
-                                <OverlayTrigger placement="left" delay={{ show: 250, hide: 400 }} overlay={submitNoteTooltip}>
+                                <OverlayTrigger placement="left" delay={{ show: 250, hide: 400 }} overlay={editNoteTooltip} >
                                     <button onClick={handleClick}><i className="fas fa-edit" variant="success" /></button>
                                 </OverlayTrigger>
                             </li>
                             <li>
                                 <OverlayTrigger placement="left" delay={{ show: 250, hide: 400 }} overlay={deleteNoteTooltip}>
-                                    <i className="fas fa-trash"></i>
+                                    <button onClick={() => props.deleteNote(props.noteID)}><i className="fas fa-trash"></i></button>
                                 </OverlayTrigger>
                             </li>
                         </ul>

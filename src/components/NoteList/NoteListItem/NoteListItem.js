@@ -4,8 +4,7 @@ import { Col, Row } from 'react-bootstrap';
 
 const ListItem = (props) => {
 
-    const title = props.title;
-    const content = props.content;
+    const { title, content } = props
 
     return (
         <Col className={props.active ? [styles.selected, styles.noteContainer] : styles.noteContainer }>
