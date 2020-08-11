@@ -31,7 +31,7 @@ const NoteList = (props) => {
     return (
         <Col className={styles.noteList}>
         <RoundButton text="Create a new note" onClick={submitNote} />
-            {noteList.reverse().map((item, index) => (
+            {noteList.map((item, index) => (
                 <ListItem 
                     content={item.content}
                     id={item.id}

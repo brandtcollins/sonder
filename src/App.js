@@ -62,18 +62,24 @@ function App() {
   const handleClick = (item, index) => {
     setSelectedNote(item)
   }
-
+  
   return (
       <Container fluid>
         <Row>
           <Sidebar />
-          <NoteList onAdd={addNote} notes={notes} selectedNote={selectedNote} setSelectedNote={handleClick} />
-          <Note onAdd={addNote} 
+          <NoteList 
+                onAdd={addNote}
+                notes={notes}
+                selectedNote={selectedNote}
+                setSelectedNote={handleClick} />
+          <Note 
+                onAdd={addNote}
                 submitEdit={submitEdit} 
                 deleteNote={deleteNote} 
                 titleValue={selectedNote.title} 
                 contentValue={selectedNote.content} 
-                noteID={selectedNote.id} />
+                noteID={selectedNote.id} 
+                />
         </Row>
       </Container>
   );
