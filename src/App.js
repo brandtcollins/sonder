@@ -37,23 +37,17 @@ function App() {
   }
 
   // Edit Note 
-  const submitEdit = (event) => {
-    // props.onAdd(note);
-    // setNote({
-    //     id: uniqid(),
-    //     icon: "fa-paw",
-    //     title: note.title,
-    //     content: note.content
-    // });
-    event.preventDefault();
+  const submitEdit = (id, note) => {
+    setNotes (
+      notes.map(noteItem => 
+        noteItem.id === id ? {
+          ...noteItem,
+          title: note.title,
+          content: note.content
+        } : noteItem
+      )
+    );
 }
-
-  // //Edit function to submit an edit on a already existing note
-  // const handleEdit = (id) => {
-  //   SetNotes(prevNotes => {
-  //     console.log(prevNotes)
-  //   })
-  // }
 
   //Delete Note
   const deleteNote = (id) => {

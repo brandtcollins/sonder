@@ -7,8 +7,6 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 let uniqid = require('uniqid');
 const editNoteTooltip = (props) => <Tooltip id="button-tooltip" {...props}>Edit Note</Tooltip>;
 const deleteNoteTooltip = (props) => <Tooltip id="button-tooltip" {...props}>Delete Note</Tooltip>;
-const submitNoteTooltip = (props) => <Tooltip id="button-tooltip" {...props}>Submit Note</Tooltip>;
-
 
 const Note = (props) => {
 
@@ -37,6 +35,7 @@ const Note = (props) => {
             setDisabledNoteFields(false)
         } else if (!disabledNoteFields) {
             setDisabledNoteFields(true)
+            props.submitEdit(props.noteID, note)
         }
     }
       
