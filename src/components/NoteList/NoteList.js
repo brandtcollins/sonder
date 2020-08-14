@@ -9,8 +9,7 @@ let uniqid = require('uniqid');
 const NoteList = (props) => {
 
     const noteList = props.notes;
-
-    const [note, setNote] = useState({
+    const [newNote] = useState({
         id: uniqid(),
         icon: "fa-paw",
         title: "You clicked the create button, this is a new note.",
@@ -18,14 +17,13 @@ const NoteList = (props) => {
     });
 
     const submitNote = (event) => {
-        props.onAdd(note);
-        setNote({
-            id: uniqid(),
-            icon: "fa-paw",
-            title: "You clicked the create button, this is a new note.",
-            content: `Shores of the cosmic ocean radio telescope bits of moving fluff cosmic fugue Sea of Tranquility billions upon billions. Two ghostly white figures in coveralls and helmets are softly dancing invent the universe as a patch of light trillion tingling of the spine network of wormholes? With pretty stories for which there's little good evidence emerged into consciousness two ghostly white figures in coveralls and helmets are softly dancing a still more glorious dawn awaits hundreds of thousands are creatures of the cosmos.`
-        });
+        props.createNote(newNote);
         event.preventDefault();
+    }
+
+    //Click event handler to change styles on list items.
+    const handleClick = (item, index) => {
+      props.setSelectedNote(item)
     }
 
     return (
@@ -39,7 +37,7 @@ const NoteList = (props) => {
                     icon={item.icon}
                     title={item.title} 
                     active={item === props.selectedNote}
-                    click={() => props.setSelectedNote(item, index)}
+                    click={() => handleClick(item, index)}
                 />
             ))}
         </Col>

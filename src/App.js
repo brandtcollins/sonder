@@ -29,27 +29,15 @@ function App() {
   //useState Hook for note list items to reference in knowing which item is selected
   const [selectedNote, setSelectedNote] = useState(notes[0]);
 
+
   // Add note function to submit a new note from user
-  const addNote = (newNote) => {
+  const createNote = (newNote) => {
     setNotes(prevNotes => {
       return [...prevNotes, newNote];
     });
   }
 
-  // Edit Note 
-  const submitEdit = (id, note) => {
-    setNotes (
-      notes.map(noteItem => 
-        noteItem.id === id ? {
-          ...noteItem,
-          title: note.title,
-          content: note.content
-        } : noteItem
-      )
-    );
-}
-
-  //Delete Note
+  //Delete Note button found on Note.js
   const deleteNote = (id) => {
     setNotes(prevNotes => {
       return prevNotes.filter((noteItem, index) => {
@@ -58,27 +46,31 @@ function App() {
     })
   }
 
-  //Click event handler to change styles on list items.
-  const handleClick = (item, index) => {
-    setSelectedNote(item)
-  }
+  //Handling input change on Note.js
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setNotes(
+      notes.map(noteItem => 
+        noteItem.id === selectedNote.id ? {
+          ...noteItem,
+              [name]: value
+        } : noteItem)
+    );
+}
   
   return (
       <Container fluid>
         <Row>
           <Sidebar />
           <NoteList 
-                onAdd={addNote}
+                createNote={createNote}
                 notes={notes}
                 selectedNote={selectedNote}
-                setSelectedNote={handleClick} />
+                setSelectedNote={setSelectedNote} />
           <Note 
-                onAdd={addNote}
-                submitEdit={submitEdit} 
-                deleteNote={deleteNote} 
-                titleValue={selectedNote.title} 
-                contentValue={selectedNote.content} 
-                noteID={selectedNote.id} 
+                inputChange={handleInputChange}
+                deleteNote={deleteNote}
+                selectedNote={selectedNote}
                 />
         </Row>
       </Container>
