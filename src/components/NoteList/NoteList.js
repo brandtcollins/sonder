@@ -10,7 +10,7 @@ const NoteList = (props) => {
 
     const noteList = props.notes;
 
-    const [newNote] = useState({
+    const [newNote, setNewNote] = useState({
         id: uniqid(),
         icon: "fa-paw",
         title: "You clicked the create button, this is a new note.",
@@ -20,6 +20,11 @@ const NoteList = (props) => {
     //Action for the 'Create a Note', pushes new note on the list to App.js
     const submitNote = (event) => {
         props.createNote(newNote);
+        //Change newNote's ID each time a new note is created
+        setNewNote({
+            ...newNote,
+            id: uniqid()
+        })
         event.preventDefault();
     }
 
