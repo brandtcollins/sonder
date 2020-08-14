@@ -10,7 +10,7 @@ import '../src/App.css';
 function App() {
   let uniqid = require('uniqid');
 
-  //useState Hook for Note input to create new item in the notelist
+  //Hook for Note input to create new item in the notelist
   const [notes, setNotes] = useState([
     {
       id: uniqid(),
@@ -26,11 +26,10 @@ function App() {
     },
   ]);
 
-  //useState Hook for note list items to reference in knowing which item is selected
+  //Hook for note list items to reference in knowing which item is selected
   const [selectedNote, setSelectedNote] = useState(notes[0]);
 
-
-  // Add note function to submit a new note from user
+  //Add note function to submit a new note from user
   const createNote = (newNote) => {
     setNotes(prevNotes => {
       return [...prevNotes, newNote];
@@ -71,6 +70,7 @@ function App() {
                 inputChange={handleInputChange}
                 deleteNote={deleteNote}
                 selectedNote={selectedNote}
+                notes={notes}
                 />
         </Row>
       </Container>

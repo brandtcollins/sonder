@@ -9,6 +9,7 @@ let uniqid = require('uniqid');
 const NoteList = (props) => {
 
     const noteList = props.notes;
+
     const [newNote] = useState({
         id: uniqid(),
         icon: "fa-paw",
@@ -16,6 +17,7 @@ const NoteList = (props) => {
         content: `Shores of the cosmic ocean radio telescope bits of moving fluff cosmic fugue Sea of Tranquility billions upon billions. Two ghostly white figures in coveralls and helmets are softly dancing invent the universe as a patch of light trillion tingling of the spine network of wormholes? With pretty stories for which there's little good evidence emerged into consciousness two ghostly white figures in coveralls and helmets are softly dancing a still more glorious dawn awaits hundreds of thousands are creatures of the cosmos.`
     });
 
+    //Action for the 'Create a Note', pushes new note on the list to App.js
     const submitNote = (event) => {
         props.createNote(newNote);
         event.preventDefault();
@@ -23,7 +25,8 @@ const NoteList = (props) => {
 
     //Click event handler to change styles on list items.
     const handleClick = (item, index) => {
-      props.setSelectedNote(item)
+        console.log(item);
+        props.setSelectedNote(item)
     }
 
     return (
@@ -36,7 +39,7 @@ const NoteList = (props) => {
                     key={item.id}
                     icon={item.icon}
                     title={item.title} 
-                    active={item === props.selectedNote}
+                    active={item.id === props.selectedNote.id}
                     click={() => handleClick(item, index)}
                 />
             ))}

@@ -12,6 +12,10 @@ const Note = (props) => {
 
     const  { id, title, content } = props.selectedNote
 
+    console.log(`Notes passed to Note.js: ${JSON.stringify(props.notes)}`);
+    console.log(`Selected Note passed to Note.js: ${JSON.stringify(props.selectedNote)}`);
+
+
     const [disabledNoteFields, setDisabledNoteFields] = useState(true);
 
 
