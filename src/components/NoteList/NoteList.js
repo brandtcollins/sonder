@@ -35,7 +35,7 @@ const NoteList = (props) => {
 
     return (
         <Col className={styles.noteList}>
-        <RoundButton text="Create a new note" onClick={submitNote} />
+        <RoundButton onClick={submitNote}>Create a new note</RoundButton>
             {noteList.map((item, index) => (
                 <ListItem 
                     title={item.title} 

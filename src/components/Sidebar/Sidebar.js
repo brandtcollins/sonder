@@ -23,7 +23,7 @@ const Sidebar = () => {
             </Row>
             <Row className={styles.row}>
                 <p>SIGN UP</p>
-                <p>REGISTER</p> 
+                <p>LOGIN</p> 
             </Row>
         </Col>
     );

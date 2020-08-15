@@ -4,13 +4,12 @@ import { Col, Row } from "react-bootstrap";
 import Tooltip from 'react-bootstrap/Tooltip'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 
-// let uniqid = require('uniqid');
 const editNoteTooltip = (props) => <Tooltip id="button-tooltip" {...props}>Edit Note</Tooltip>;
 const deleteNoteTooltip = (props) => <Tooltip id="button-tooltip" {...props}>Delete Note</Tooltip>;
 
 const Note = (props) => {
 
-    const  { id, title, content } = props.notes[props.foundNote];
+    const  { id, title, content } = props.notes;
 
     const [disabledNoteFields, setDisabledNoteFields] = useState(true);
 
