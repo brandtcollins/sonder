@@ -10,20 +10,16 @@ const deleteNoteTooltip = (props) => <Tooltip id="button-tooltip" {...props}>Del
 
 const Note = (props) => {
 
-    const  { id, title, content } = props.selectedNote
-
-    console.log(`Notes passed to Note.js: ${JSON.stringify(props.notes)}`);
-    console.log(`Selected Note passed to Note.js: ${JSON.stringify(props.selectedNote)}`);
-
+    const  { id, title, content } = props.notes[props.foundNote];
 
     const [disabledNoteFields, setDisabledNoteFields] = useState(true);
-
 
     const handleClick = () => {
         if (disabledNoteFields) {
             setDisabledNoteFields(false)
         } else if (!disabledNoteFields) {
             setDisabledNoteFields(true)
+
         }
     }
       

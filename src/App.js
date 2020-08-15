@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar/Sidebar';
 import {Container, Row} from 'react-bootstrap'
 import NoteList from './components/NoteList/NoteList';
@@ -13,7 +13,7 @@ function App() {
   //Hook for Note input to create new item in the notelist
   const [notes, setNotes] = useState([
     {
-      id: uniqid(),
+      id: 123,
       icon: "fa-briefcase",
       title: "This is the first note, click to open and edit your note",
       content: "Vanquish the impossible the only home we've ever known rogue as a patch of light Apollonius of Perga the ash of stellar alchemy."
@@ -26,8 +26,18 @@ function App() {
     },
   ]);
 
-  //Hook for note list items to reference in knowing which item is selected
-  const [selectedNote, setSelectedNote] = useState(notes[0]);
+  const [selectedNoteID, setSelectedNoteID] = useState(123);
+  const [foundNote, setFoundNote] = useState(0);
+
+  useEffect(() => {
+    searchNotes();
+  });
+
+  const searchNotes = () => {
+    const foundSingleNote = notes.findIndex(noteItem => noteItem.id === selectedNoteID)
+    setFoundNote(foundSingleNote)
+  }
+
 
   //Add note function to submit a new note from user
   const createNote = (newNote) => {
@@ -39,10 +49,16 @@ function App() {
   //Delete Note button found on Note.js
   const deleteNote = (id) => {
     setNotes(prevNotes => {
-      return prevNotes.filter((noteItem, index) => {
+      return prevNotes.filter((noteItem) => {
         return noteItem.id !== id;
       })
     })
+  }
+
+  //Handle click on NoteList.js 
+  const handleClick = (item) => {
+    const selectedID = item.id;
+    setSelectedNoteID(selectedID);
   }
 
   //Handling input change on Note.js
@@ -50,7 +66,7 @@ function App() {
     const { name, value } = event.target;
     setNotes(
       notes.map(noteItem => 
-        noteItem.id === selectedNote.id ? {
+        noteItem.id === selectedNoteID ? {
           ...noteItem,
               [name]: value
         } : noteItem)
@@ -64,12 +80,14 @@ function App() {
           <NoteList 
                 createNote={createNote}
                 notes={notes}
-                selectedNote={selectedNote}
-                setSelectedNote={setSelectedNote} />
+                selectedNote={selectedNoteID}
+                setSelectedNote={handleClick}
+                />
           <Note 
                 inputChange={handleInputChange}
                 deleteNote={deleteNote}
-                selectedNote={selectedNote}
+                selectedNote={selectedNoteID}
+                foundNote={foundNote}
                 notes={notes}
                 />
         </Row>

@@ -30,7 +30,6 @@ const NoteList = (props) => {
 
     //Click event handler to change styles on list items.
     const handleClick = (item, index) => {
-        console.log(item);
         props.setSelectedNote(item)
     }
 
@@ -39,12 +38,12 @@ const NoteList = (props) => {
         <RoundButton text="Create a new note" onClick={submitNote} />
             {noteList.map((item, index) => (
                 <ListItem 
+                    title={item.title} 
                     content={item.content}
                     id={item.id}
                     key={item.id}
                     icon={item.icon}
-                    title={item.title} 
-                    active={item.id === props.selectedNote.id}
+                    active={item.id === props.selectedNote}
                     click={() => handleClick(item, index)}
                 />
             ))}
