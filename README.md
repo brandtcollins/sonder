@@ -8,4 +8,5 @@ This is a note taking app that I am building using React hooks. On the surface t
 Sonder should run on localhost:3000 after installing and starting the app
 
 `npm install`
+
 `npm start`
