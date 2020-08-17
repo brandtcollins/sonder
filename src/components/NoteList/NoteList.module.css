@@ -1,8 +1,25 @@
 .noteList {
     background-color: #EDF2F4;
     height: 100vh;
+    overflow: auto;
 }
 
+.noteList::-webkit-scrollbar-track
+{
+	/* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); */
+	background-color: #dfdfdf;
+}
+
+.noteList::-webkit-scrollbar
+{
+	width: .35rem;
+	background-color: #F5F5F5;
+}
+
+.noteList::-webkit-scrollbar-thumb
+{
+	background-color: #bbbbbb;
+}
 .noteContainer {
   border: 1px solid #B4C7CE;
   border-top: 0;

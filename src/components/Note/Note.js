@@ -21,6 +21,8 @@ const Note = (props) => {
 
         }
     }
+
+    console.log(props.notes.id);
       
     return (
         <Col xs={6} className={[styles.note, styles.col]}>

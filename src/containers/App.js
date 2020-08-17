@@ -17,13 +17,7 @@ function App() {
       icon: "fa-briefcase",
       title: "This is the first note, click to open and edit your note",
       content: "Vanquish the impossible the only home we've ever known rogue as a patch of light Apollonius of Perga the ash of stellar alchemy."
-    },
-    {
-      id: uniqid(),
-      icon: "fa-code",
-      title: "This is the second note, click to open and edit this note",
-      content: "Something incredible is waiting to be known vastness is bearable only through love dispassionate extraterrestrial observer and billions upon billions upon billions upon billions upon billions upon billions upon billions"
-    },
+    }
   ]);
 
   //Hook to update selectedNoteID for noteList.js and Note.js
@@ -33,7 +27,16 @@ function App() {
   const [foundNote, setFoundNote] = useState(notes[0]);
 
   //Hook to update note.js when a new note is selected in noteList.js
+
   useEffect(() => {
+    const data = localStorage.getItem('notes')
+    if (data) {
+      setNotes(JSON.parse(data))
+    }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('notes', JSON.stringify(notes))
     searchNotes();
   });
 
