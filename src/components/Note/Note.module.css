@@ -1,5 +1,12 @@
-.col {
-    padding: 50px 0 0 75px ;
+.Note {
+    padding: 50px 0 0 0px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.col > .row {
+    height: 100vh;
 }
 
 .noteHeadline:disabled {
@@ -11,7 +18,8 @@
     width: 100%;
     border: none;
     resize: none;
-    overflow: hidden;
+    overflow: auto;
+
 }
 
 .noteHeadline {
@@ -25,6 +33,7 @@
     resize: none;
     overflow: hidden;
     border: 1px solid #E4E4E4;
+    overflow: auto;
 }
 
 .noteBody:disabled {
@@ -32,26 +41,45 @@
     font-family: Poppins;
     width: 100%;
     border: none;
-    height: 50rem;
     outline: none;
     resize: none;
+    overflow: auto;
+    flex: 1;
 }
 
 .noteBody {
     font-family: 'Courier New', Courier, monospace;
     width: 100%;
     border: none;
-    height: 50rem;
     outline: none;
     border: 1px solid #E4E4E4;
     resize: none;
+    margin: 0 0 50px 0;
+    flex: 1;
+}
+
+.noteBody::-webkit-scrollbar-track
+{
+	/* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); */
+	background-color: #dfdfdf;
+}
+
+.noteBody::-webkit-scrollbar
+{
+	width: .35rem;
+	background-color: #F5F5F5;
+}
+
+.noteBody::-webkit-scrollbar-thumb
+{
+	background-color: #bbbbbb;
 }
 
 .noteNav {
     color: #E4E4E4;
     font-size: 1.5rem;
-    padding: 0 0 0 20px;
     text-align: center;
+    margin: 50px 0 0 0;
 }
 
 .noteNav button {

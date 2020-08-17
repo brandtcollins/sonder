@@ -25,10 +25,10 @@ const Note = (props) => {
     console.log(props.notes.id);
       
     return (
-        <Col xs={6} className={[styles.note, styles.col]}>
+        <Col xs={6}>
             <Row>
-                <Col xs={10}>
-                    <div>
+                <Col xs={11}>
+                    <div className={styles.Note}>
                         <textarea 
                             className={styles.noteHeadline} 
                             name="title"
@@ -47,7 +47,7 @@ const Note = (props) => {
                         />
                     </div>
                 </Col>
-                <Col xs={2}>
+                <Col xs={1}>
                     <div className={styles.noteNav}>
                         <ul>
                             <li>
