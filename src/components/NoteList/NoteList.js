@@ -3,6 +3,7 @@ import styles from './NoteList.module.css';
 import ListItem from './NoteListItem/NoteListItem';
 import { Col } from 'react-bootstrap';
 import RoundButton from '../Button/Button';
+import quoteGenerator from '../../utils/quoteGenerator/quoteGenerator'
 
 let uniqid = require('uniqid');
 
@@ -14,7 +15,7 @@ const NoteList = (props) => {
         id: uniqid(),
         icon: "fa-paw",
         title: "You clicked the create button, this is a new note.",
-        content: `Shores of the cosmic ocean radio telescope bits of moving fluff cosmic fugue Sea of Tranquility billions upon billions. Two ghostly white figures in coveralls and helmets are softly dancing invent the universe as a patch of light trillion tingling of the spine network of wormholes? With pretty stories for which there's little good evidence emerged into consciousness two ghostly white figures in coveralls and helmets are softly dancing a still more glorious dawn awaits hundreds of thousands are creatures of the cosmos.`
+        content: quoteGenerator() 
     });
 
     //Action for the 'Create a Note', pushes new note on the list to App.js
@@ -23,7 +24,8 @@ const NoteList = (props) => {
         //Change newNote's ID each time a new note is created
         setNewNote({
             ...newNote,
-            id: uniqid()
+            id: uniqid(),
+            content: quoteGenerator() 
         })
         event.preventDefault();
     }

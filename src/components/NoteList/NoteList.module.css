@@ -4,24 +4,25 @@
     overflow: auto;
 }
 
-.noteList::-webkit-scrollbar-track
-{
+.noteContainer:nth-child(2) {
+  border-top: 1px solid #c6d8dd;
+}
+
+.noteList::-webkit-scrollbar-track {
 	/* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); */
 	background-color: #dfdfdf;
 }
 
-.noteList::-webkit-scrollbar
-{
+.noteList::-webkit-scrollbar {
 	width: .35rem;
 	background-color: #F5F5F5;
 }
 
-.noteList::-webkit-scrollbar-thumb
-{
+.noteList::-webkit-scrollbar-thumb {
 	background-color: #bbbbbb;
 }
 .noteContainer {
-  border: 1px solid #B4C7CE;
+  border: 1px solid #c6d8dd;
   border-top: 0;
   border-left: 5px solid #EDF2F4;
   padding: 1.5rem 0;
