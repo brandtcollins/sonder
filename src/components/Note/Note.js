@@ -21,8 +21,6 @@ const Note = (props) => {
 
         }
     }
-
-    console.log(props.notes.id);
       
     return (
         <Col xs={6}>

@@ -49,6 +49,11 @@ function App() {
 
   //Delete note button found on Note.js
   const deleteNote = (id) => {
+
+    const deletedNoteIndex = notes.findIndex(noteItem => noteItem.id === id);
+    const newIndexToDisplay = deletedNoteIndex - 1;
+    setSelectedNoteID(notes[newIndexToDisplay].id)
+
     setNotes(prevNotes => {
       return prevNotes.filter((noteItem) => {
         return noteItem.id !== id;
@@ -67,6 +72,7 @@ function App() {
     const foundSingleNote = notes.findIndex(noteItem => noteItem.id === selectedNoteID)
     setFoundNote(notes[foundSingleNote])
   }
+
 
   //Handling input change for the selected note on Note.js
   const handleInputChange = (event) => {

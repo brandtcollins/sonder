@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import SidebarLink from '../SidebarLink/SidebarLink';
 import categoryList from "./CategoryList";
 
@@ -14,12 +14,12 @@ function Categories(){
     }
 
     return (
-        <div>
+        <Fragment>
             <p>CATEGORIES</p>
             <ul>
                 {categoryList.map(buildCategoryList)}
             </ul>
-        </div> 
+        </Fragment>
     )
 }
 
