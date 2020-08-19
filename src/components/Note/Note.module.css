@@ -81,6 +81,10 @@
     margin: 50px 0 0 0;
 }
 
+.noteNav ul li {
+    padding: 10px 0;
+}
+
 .noteNav button {
     background-color: white;
     border: 0px;

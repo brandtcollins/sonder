@@ -12,9 +12,10 @@ function App() {
   const [notes, setNotes] = useState([
     {
       id: 123,
+      category: "All",
       icon: "fa-briefcase",
       title: "This is the first note, click to open and edit your note",
-      content: "Vanquish the impossible the only home we've ever known rogue as a patch of light Apollonius of Perga the ash of stellar alchemy."
+      content: "Select a note from the list on the left and then click the edit icon on the top right.  Enter you notes and then save!"
     }
   ]);
 
@@ -65,7 +66,7 @@ function App() {
     setFoundNote(notes[foundNote])
   }
 
-  const handleInputChange = (event) => {
+  const handleNoteChange = (event) => {
     const { name, value } = event.target;
     setNotes(
       notes.map(noteItem => 
@@ -73,8 +74,20 @@ function App() {
           ...noteItem,
               [name]: value
         } : noteItem)
-    );
-}
+    )
+  }
+
+  const handleCategoryChange = (item) => {
+    console.log(`This worked: ${item}`);
+
+    setNotes(
+      notes.map(noteItem => 
+        noteItem.id === selectedNoteID ? {
+          ...noteItem,
+              category: item
+        } : noteItem)
+    )
+  }
   
   return (
       <Container fluid>
@@ -87,7 +100,8 @@ function App() {
                 setSelectedNote={handleClick}
                 />
           <Note 
-                inputChange={handleInputChange}
+                inputChange={handleNoteChange}
+                categoryChange={handleCategoryChange}
                 deleteNote={deleteNote}
                 selectedNote={selectedNoteID}
                 notes={foundNote}

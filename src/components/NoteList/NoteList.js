@@ -13,6 +13,7 @@ const NoteList = (props) => {
 
     const [newNote, setNewNote] = useState({
         id: uniqid(),
+        category: "All",
         icon: "fa-paw",
         title: "You clicked the create button, this is a new note.",
         content: quoteGenerator() 
