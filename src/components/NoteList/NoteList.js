@@ -9,11 +9,11 @@ let uniqid = require('uniqid');
 
 const NoteList = (props) => {
 
-    const noteList = props.notes;
+    const {notes, category} = props;
 
     const [newNote, setNewNote] = useState({
         id: uniqid(),
-        category: "All",
+        category: category,
         icon: "fa-paw",
         title: "You clicked the create button, this is a new note.",
         content: quoteGenerator() 
@@ -24,22 +24,24 @@ const NoteList = (props) => {
         props.createNote(newNote);
         //Change newNote's ID each time a new note is created
         setNewNote({
-            ...newNote,
             id: uniqid(),
+            category: category,
+            icon: "fa-paw",
+            title: "You clicked the create button, this is a new note.",
             content: quoteGenerator() 
         })
         event.preventDefault();
     }
-
+    
     //Click event handler to change styles on list items.
-    const handleClick = (item, index) => {
+    const handleClick = (item) => {
         props.setSelectedNote(item)
     }
 
     return (
         <Col className={styles.noteList}>
         <RoundButton onClick={submitNote}>Create a new note</RoundButton>
-            {noteList.map((item, index) => (
+            {notes.filter(noteItem => noteItem.category !== "deleted").map((item, index) => (
                 <ListItem 
                     title={item.title} 
                     content={item.content}
@@ -47,7 +49,7 @@ const NoteList = (props) => {
                     key={item.id}
                     icon={item.icon}
                     active={item.id === props.selectedNote}
-                    click={() => handleClick(item, index)}
+                    click={() => handleClick(item)}
                 />
             ))}
         </Col>

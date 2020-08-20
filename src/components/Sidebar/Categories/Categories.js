@@ -3,13 +3,17 @@ import SidebarLink from '../SidebarLink/SidebarLink';
 import categoryList from "./CategoryList";
 
 
-function Categories(){
+function Categories(props){
 
     let uniqid = require('uniqid');
 
+    const handleClick = (event) => {
+        props.changeCategory(event.target.name)
+    }
+
     function buildCategoryList(item){
         return (
-            <SidebarLink key={uniqid()} icon={item.icon} name={item.name} />
+            <SidebarLink click={handleClick} key={uniqid()} icon={item.icon} name={item.name} />
         );
     }
 

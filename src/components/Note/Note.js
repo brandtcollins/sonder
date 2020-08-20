@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./Note.module.css"
+import styles from "./Note.module.css";
 import { Col, Row, OverlayTrigger, Popover } from "react-bootstrap";
 import Tooltip from 'react-bootstrap/Tooltip'
 
@@ -9,7 +9,7 @@ const Note = (props) => {
     const [disabledNoteFields, setDisabledNoteFields] = useState(true);
     const [value, setValue] = useState('')
 
-    const  { id, title, content } = props.notes;
+    const  { id, title, content, category } = props.notes;
 
     const handleClick = (event) => {
         if (disabledNoteFields) {
@@ -21,6 +21,7 @@ const Note = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        setValue('')
         props.categoryChange(value)
     }
 
@@ -37,7 +38,7 @@ const Note = (props) => {
           <Popover.Title as="h3">Enter Note Category</Popover.Title>
           <Popover.Content>
             <form onSubmit={handleSubmit}>
-                <input onChange={handleChange} placeholder="Type a category" value={value}></input>
+                <input className={styles.categoryInput} onChange={handleChange} placeholder={`Current category: ${category}`} value={value}></input>
             </form> 
           </Popover.Content>
         </Popover>
@@ -47,7 +48,7 @@ const Note = (props) => {
       <Popover id="popover-basic">
         <Popover.Title as="h3">Are you sure you want to delete?</Popover.Title>
         <Popover.Content>
-          <button onClick={() => props.deleteNote(id)} >Yes></button> 
+          <button className={styles.button} onClick={() => props.deleteNote(id)}>Yes, delete this note.</button> 
         </Popover.Content>
       </Popover>
     );
@@ -83,16 +84,16 @@ const Note = (props) => {
                                     <button onClick={handleClick}><i className="fas fa-edit" variant="success" alt="edit"/></button>
                                 </OverlayTrigger>
                             </li>
-                            <OverlayTrigger trigger="click" placement="left" overlay={categoryPopover}>
+                            <OverlayTrigger trigger="click" rootClose placement="left" overlay={categoryPopover}>
                                 <li>
                                     <OverlayTrigger placement="left" delay={{ show: 250, hide: 400 }} overlay={editCategory}>
-                                        <button variant="success"><i class="fas fa-tag"></i></button>
+                                        <button variant="success"><i className="fas fa-tag"></i></button>
                                     </OverlayTrigger>
                                 </li>
                             </OverlayTrigger>
-                            <OverlayTrigger trigger="click" placement="left" overlay={deleteNotePopover}>
+                            <OverlayTrigger trigger="click" rootClose placement="left" overlay={deleteNotePopover}>
                                 <li>
-                                    <OverlayTrigger placement="left" delay={{ show: 250, hide: 400 }} overlay={deleteNoteTooltip}>
+                                    <OverlayTrigger rootCloseEvent="click" placement="left" delay={{ show: 250, hide: 400 }} overlay={deleteNoteTooltip}>
                                         <button><i className="fas fa-trash"></i></button>
                                     </OverlayTrigger>
                                 </li>

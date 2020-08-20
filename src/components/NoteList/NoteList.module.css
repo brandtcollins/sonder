@@ -1,5 +1,6 @@
 .noteList {
     background-color: #EDF2F4;
+    border-right: 1px solid #c6d8dd;
     height: 100vh;
     overflow: auto;
 }
@@ -22,8 +23,8 @@
 	background-color: #bbbbbb;
 }
 .noteContainer {
-  border: 1px solid #c6d8dd;
-  border-top: 0;
+  border-bottom: 1px solid #c6d8dd;
+
   border-left: 5px solid #EDF2F4;
   padding: 1.5rem 0;
 }

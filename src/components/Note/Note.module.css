@@ -19,6 +19,7 @@
     border: none;
     resize: none;
     overflow: auto;
+    color: #3F3F3F;
 }
 
 .noteHeadline {
@@ -33,6 +34,7 @@
     overflow: hidden;
     border: 1px solid #E4E4E4;
     overflow: auto;
+    color: #3F3F3F;
 }
 
 .noteBody:disabled {
@@ -99,4 +101,33 @@
 .noteNav ul{
     list-style: none;
     padding: 0;
+}
+
+.delete {
+    font-size: 2rem;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.categoryInput {
+    border: 1px solid #c6d8dd;
+    padding: 4px 5px;
+}
+
+.button {
+    font-family: "Barlow";
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 5px 5px;
+    padding: 5px 5px;
+    background-color: #D90429;
+    border: 1px solid #E2E8EB;
+    width: 95%;
+    border-radius: 35px 35px;
+}
+
+.button:hover {
+    background-color: #EF233C;
+    border: 1px solid #B4CBD4;
 }

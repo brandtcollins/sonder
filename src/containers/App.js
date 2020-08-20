@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import Sidebar from '../components/Sidebar/Sidebar';
 import {Container, Row} from 'react-bootstrap'
 import NoteList from '../components/NoteList/NoteList';
@@ -7,7 +7,64 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 
 
+const initialState = {
+  notes: [{
+    id: 123,
+    category: "All",
+    icon: 'fa-brifcase',
+    title: 'This is the first note, click to open and edit your note',
+    content: 'Select a note from the list on the left and then click the edit icon on the top right.  Enter your notes and then save!'
+  }],
+  selectedNoteID: 123,
+  foundNote: 123,
+  category: 'All'
+}  
+
+const reducer = (state, action) => {
+  const { payload } = action
+  const { id, title, content, icon } = action.payload
+
+  switch(action.type) {
+    case "createNewNote":
+      return {
+        ...state,
+        notes: [...state.notes, {
+          id: id, 
+          title: title, 
+          content: content,
+          icon: icon
+        }]
+      };
+      case "deleteNote":
+        return {
+          ...state, 
+          notes: payload
+        }
+    case "selectedNoteItem":
+      return {
+        ...state,
+        selectedNoteID: payload
+      }
+    case "foundNoteItem":
+      return {
+        ...state,
+        foundNote: payload
+      }
+    case "loadLocalStorage":
+      return {
+        ...state,
+        notes: payload
+      }
+    default:
+      return state
+  }
+}
+
+
+
 function App() {
+
+  const [state, dispatch] = useReducer(reducer, initialState)
 
   const [notes, setNotes] = useState([
     {
@@ -19,58 +76,47 @@ function App() {
     }
   ]);
 
-  const [selectedNoteID, setSelectedNoteID] = useState(123);
-  const [foundNote, setFoundNote] = useState(notes[0]);
+  const [category, setCategory] = useState("All")
 
   //Load notes from Localstorage
   useEffect(() => {
     const data = localStorage.getItem('notes')
     if (data) {
-      setNotes(JSON.parse(data))
+      dispatch({type: 'loadLocalStorage', payload: JSON.parse(data)})
     }
   }, [])
 
   //Save notes to localstorage as well as search note for Note.js to display
   useEffect(() => {
-    localStorage.setItem('notes', JSON.stringify(notes))
-    searchNotes();
+    localStorage.setItem('notes', JSON.stringify(state.notes))
   });
 
-  const createNote = (newNote) => {
-    setNotes(prevNotes => {
-      return [...prevNotes, newNote];
-    });
-  }
+  //Search notes each state refresh
+  useEffect(() => {
+    searchNotes();
+    console.log(`State updated, search notes ran`);
+  }, [state.selectedNoteID])
 
   const deleteNote = (id) => {
     //Find the next note's index to display once current note is deleted.
-    const deletedNoteIndex = notes.findIndex(noteItem => noteItem.id === id);
+    const deletedNoteIndex = state.notes.findIndex(noteItem => noteItem.id === id);
     const newIndexToDisplay = deletedNoteIndex - 1;
-    setSelectedNoteID(notes[newIndexToDisplay].id)
 
-    //Filter Notes and delete the note with matching ID
-    setNotes(prevNotes => {
-      return prevNotes.filter((noteItem) => {
-        return noteItem.id !== id;
-      })
-    })
-  }
+    const deleteSingleNote = state.notes.filter((noteItem) => noteItem.id !== id)
 
-  const handleClick = (listItem) => {
-    const selectedID = listItem.id;
-    setSelectedNoteID(selectedID);
+    dispatch({type: 'selectedNoteItem', payload: state.notes[newIndexToDisplay].id})
+    dispatch({type: 'deleteNote', payload: deleteSingleNote})
   }
 
   const searchNotes = () => {
-    const foundNote = notes.findIndex(noteItem => noteItem.id === selectedNoteID)
-    setFoundNote(notes[foundNote])
+    dispatch({type: 'foundNoteItem', payload: state.notes.find(noteItem => noteItem.id === state.selectedNoteID)})
   }
 
   const handleNoteChange = (event) => {
     const { name, value } = event.target;
     setNotes(
       notes.map(noteItem => 
-        noteItem.id === selectedNoteID ? {
+        noteItem.id === state.selectedNoteID ? {
           ...noteItem,
               [name]: value
         } : noteItem)
@@ -78,33 +124,35 @@ function App() {
   }
 
   const handleCategoryChange = (item) => {
-    console.log(`This worked: ${item}`);
-
     setNotes(
       notes.map(noteItem => 
-        noteItem.id === selectedNoteID ? {
+        noteItem.id === state.selectedNoteID ? {
           ...noteItem,
               category: item
         } : noteItem)
     )
   }
+
+  const changeCategory = (categoryName) => {
+    setCategory(categoryName)
+  }
   
   return (
       <Container fluid>
         <Row>
-          <Sidebar />
+          <Sidebar changeCategory={changeCategory} />
           <NoteList 
-                createNote={createNote}
-                notes={notes}
-                selectedNote={selectedNoteID}
-                setSelectedNote={handleClick}
+                createNote={(newNote)=> dispatch({ type: 'createNewNote', payload: newNote})}
+                notes={state.notes}
+                category={category}
+                selectedNote={state.selectedNoteID}
+                setSelectedNote={(listItem) => dispatch({type: 'selectedNoteItem', payload: listItem.id})}
                 />
           <Note 
                 inputChange={handleNoteChange}
                 categoryChange={handleCategoryChange}
                 deleteNote={deleteNote}
-                selectedNote={selectedNoteID}
-                notes={foundNote}
+                notes={state.foundNote}
                 />
         </Row>
       </Container>

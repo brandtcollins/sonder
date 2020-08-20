@@ -6,7 +6,7 @@ import { Row, Col } from 'react-bootstrap';
 import styles from './Sidebar.module.css';
 
 
-const Sidebar = () => {
+const Sidebar = (props) => {
 
     return (
         <Col xs={2} className={styles.sidebar}>
@@ -19,7 +19,7 @@ const Sidebar = () => {
                     </ul>
             </Row>
             <Row className={styles.row}>
-                <Categories />
+                <Categories changeCategory={props.changeCategory} />
             </Row>
             <Row className={styles.row}>
                 <p>SIGN UP</p>
