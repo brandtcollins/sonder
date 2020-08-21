@@ -4,6 +4,7 @@ import ListItem from './NoteListItem/NoteListItem';
 import { Col } from 'react-bootstrap';
 import RoundButton from '../Button/Button';
 import quoteGenerator from '../../utils/quoteGenerator/quoteGenerator'
+import titleGenerator from '../../utils/titleGenerator/titleGenerator'
 
 let uniqid = require('uniqid');
 
@@ -15,7 +16,7 @@ const NoteList = (props) => {
         id: uniqid(),
         category: category,
         icon: "fa-paw",
-        title: "You clicked the create button, this is a new note.",
+        title: titleGenerator(),
         content: quoteGenerator() 
     });
 
@@ -27,7 +28,7 @@ const NoteList = (props) => {
             id: uniqid(),
             category: category,
             icon: "fa-paw",
-            title: "You clicked the create button, this is a new note.",
+            title: titleGenerator(),
             content: quoteGenerator() 
         })
         event.preventDefault();
