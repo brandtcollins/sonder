@@ -19,7 +19,7 @@ const Sidebar = (props) => {
                     </ul>
             </Row>
             <Row className={styles.row}>
-                <Categories changeCategory={props.changeCategory} />
+                <Categories setCategory={props.setCategory} />
             </Row>
             <Row className={styles.row}>
                 <p>SIGN UP</p>

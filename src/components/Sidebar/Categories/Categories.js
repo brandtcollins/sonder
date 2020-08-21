@@ -8,7 +8,7 @@ function Categories(props){
     let uniqid = require('uniqid');
 
     const handleClick = (event) => {
-        props.changeCategory(event.target.name)
+        props.setCategory(event.target.name)
     }
 
     function buildCategoryList(item){

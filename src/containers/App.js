@@ -17,14 +17,20 @@ const initialState = {
   }],
   selectedNoteID: 123,
   foundNote: 123,
-  category: 'All'
+  category: 'All',
+  newIndex: null
 }  
 
 const reducer = (state, action) => {
   const { payload } = action
-  const { id, title, content, icon } = action.payload
+  const { id, title, content, icon, category } = action.payload
 
   switch(action.type) {
+    case "loadLocalStorage":
+      return {
+        ...state,
+        notes: payload
+      }
     case "createNewNote":
       return {
         ...state,
@@ -32,14 +38,18 @@ const reducer = (state, action) => {
           id: id, 
           title: title, 
           content: content,
-          icon: icon
+          icon: icon,
+          category: category
         }]
       };
-      case "deleteNote":
-        return {
-          ...state, 
-          notes: payload
-        }
+    case "deleteNote":
+      const deletedNoteIndex = state.notes.findIndex(noteItem => noteItem.id === state.selectedNoteID);
+      const newNoteToDisplay = state.notes[deletedNoteIndex - 1].id;
+      return {
+        ...state,
+        selectedNoteID: newNoteToDisplay,
+        notes: state.notes.filter((noteItem) => noteItem.id !== payload)
+      }
     case "selectedNoteItem":
       return {
         ...state,
@@ -50,17 +60,26 @@ const reducer = (state, action) => {
         ...state,
         foundNote: payload
       }
-    case "loadLocalStorage":
+    case "setCategory":
       return {
         ...state,
-        notes: payload
+        category: payload
+      }
+    case "noteCategoryChange":
+      const updatedNotes = state.notes.map(noteItem => 
+        noteItem.id === state.selectedNoteID ? {
+          ...noteItem,
+              category: payload
+        } : noteItem)
+
+      return {
+        ...state, 
+        notes: updatedNotes
       }
     default:
       return state
   }
 }
-
-
 
 function App() {
 
@@ -76,7 +95,6 @@ function App() {
     }
   ]);
 
-  const [category, setCategory] = useState("All")
 
   //Load notes from Localstorage
   useEffect(() => {
@@ -94,19 +112,8 @@ function App() {
   //Search notes each state refresh
   useEffect(() => {
     searchNotes();
-    console.log(`State updated, search notes ran`);
+    console.log(state);
   }, [state.selectedNoteID])
-
-  const deleteNote = (id) => {
-    //Find the next note's index to display once current note is deleted.
-    const deletedNoteIndex = state.notes.findIndex(noteItem => noteItem.id === id);
-    const newIndexToDisplay = deletedNoteIndex - 1;
-
-    const deleteSingleNote = state.notes.filter((noteItem) => noteItem.id !== id)
-
-    dispatch({type: 'selectedNoteItem', payload: state.notes[newIndexToDisplay].id})
-    dispatch({type: 'deleteNote', payload: deleteSingleNote})
-  }
 
   const searchNotes = () => {
     dispatch({type: 'foundNoteItem', payload: state.notes.find(noteItem => noteItem.id === state.selectedNoteID)})
@@ -122,36 +129,24 @@ function App() {
         } : noteItem)
     )
   }
-
-  const handleCategoryChange = (item) => {
-    setNotes(
-      notes.map(noteItem => 
-        noteItem.id === state.selectedNoteID ? {
-          ...noteItem,
-              category: item
-        } : noteItem)
-    )
-  }
-
-  const changeCategory = (categoryName) => {
-    setCategory(categoryName)
-  }
   
   return (
       <Container fluid>
         <Row>
-          <Sidebar changeCategory={changeCategory} />
+          <Sidebar  setCategory={(categoryName) => dispatch({type: 'setCategory', payload: categoryName})} />
           <NoteList 
                 createNote={(newNote)=> dispatch({ type: 'createNewNote', payload: newNote})}
                 notes={state.notes}
-                category={category}
+                category={state.category}
                 selectedNote={state.selectedNoteID}
                 setSelectedNote={(listItem) => dispatch({type: 'selectedNoteItem', payload: listItem.id})}
                 />
           <Note 
                 inputChange={handleNoteChange}
-                categoryChange={handleCategoryChange}
-                deleteNote={deleteNote}
+                categoryChange={(item) => dispatch({type: 'noteCategoryChange', payload: item})}
+                // categoryChange={(value) => dispatch({type: 'noteCategoryChange', payload: value})}
+                deleteNote={(id) => dispatch({type: 'deleteNote', payload: id})}
+                // deleteNote={deleteNote}
                 notes={state.foundNote}
                 />
         </Row>

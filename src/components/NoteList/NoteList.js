@@ -41,7 +41,7 @@ const NoteList = (props) => {
     return (
         <Col className={styles.noteList}>
         <RoundButton onClick={submitNote}>Create a new note</RoundButton>
-            {notes.filter(noteItem => noteItem.category !== "deleted").map((item, index) => (
+            {notes.filter(noteItem => noteItem.category === props.category).map((item, index) => (
                 <ListItem 
                     title={item.title} 
                     content={item.content}
