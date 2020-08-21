@@ -10,12 +10,11 @@ const initialState = {
   notes: [{
     id: 123,
     category: "All",
-    icon: 'fa-brifcase',
+    icon: 'fa-briefcase',
     title: 'This is the first note, click to open and edit your note',
     content: 'Select a note from the list on the left and then click the edit icon on the top right.  Enter your notes and then save!'
   }],
   selectedNoteID: 123,
-  foundNote: 123,
   foundNoteIndex: 0,
   category: 'All',
 }  
@@ -49,7 +48,7 @@ const reducer = (state, action) => {
         selectedNoteID: newNoteToDisplay,
         notes: state.notes.filter((noteItem) => noteItem.id !== payload)
       }
-    case "selectedNoteItem":
+    case "selectedNote":
       return {
         ...state,
         selectedNoteID: payload
@@ -60,9 +59,11 @@ const reducer = (state, action) => {
         foundNoteIndex: payload
       }
     case "setCategory":
+      const newCategoryNote = state.notes.find( noteItem => noteItem.category === state.category)
       return {
         ...state,
-        category: payload
+        category: payload,
+        selectedNoteID: newCategoryNote.id
       }
     case "noteCategoryChange":
       const updatedNotes = state.notes.map(noteItem => 
@@ -72,8 +73,8 @@ const reducer = (state, action) => {
         } : noteItem)
 
       return {
-        ...state, 
-        notes: updatedNotes
+        ...state,
+        notes: updatedNotes,
       }
     case "inputChange":
       const { name, value } = payload;
@@ -126,7 +127,7 @@ function App() {
                 notes={state.notes}
                 category={state.category}
                 selectedNote={state.selectedNoteID}
-                setSelectedNote={(listItem) => dispatch({type: 'selectedNoteItem', payload: listItem.id})}
+                setSelectedNote={(listItem) => dispatch({type: 'selectedNote', payload: listItem.id})}
                 />
           <Note 
                 inputChange={(event) => dispatch({type: 'inputChange', payload: event.target})}

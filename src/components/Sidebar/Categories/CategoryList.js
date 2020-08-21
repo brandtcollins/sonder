@@ -1,5 +1,11 @@
 const categoryList =[
     {
+        key: 1332,
+        id: 0,
+        icon: "fa-globe-africa",
+        name: "All"
+    },
+    {
         key: 132,
         id: 1,
         icon: "fa-briefcase",
