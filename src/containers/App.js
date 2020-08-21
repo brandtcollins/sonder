@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import Sidebar from '../components/Sidebar/Sidebar';
 import {Container, Row} from 'react-bootstrap'
 import NoteList from '../components/NoteList/NoteList';
 import Note from '../components/Note/Note';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
-
 
 const initialState = {
   notes: [{
@@ -17,8 +16,8 @@ const initialState = {
   }],
   selectedNoteID: 123,
   foundNote: 123,
+  foundNoteIndex: 0,
   category: 'All',
-  newIndex: null
 }  
 
 const reducer = (state, action) => {
@@ -55,10 +54,10 @@ const reducer = (state, action) => {
         ...state,
         selectedNoteID: payload
       }
-    case "foundNoteItem":
+    case "foundNoteIndex":
       return {
         ...state,
-        foundNote: payload
+        foundNoteIndex: payload
       }
     case "setCategory":
       return {
@@ -76,6 +75,17 @@ const reducer = (state, action) => {
         ...state, 
         notes: updatedNotes
       }
+    case "inputChange":
+      const { name, value } = payload;
+      const updatedInputs = state.notes.map(noteItem => 
+        noteItem.id === state.selectedNoteID ? {
+          ...noteItem,
+            [name]: value
+        } : noteItem)
+      return {
+        ...state,
+        notes: updatedInputs
+      }
     default:
       return state
   }
@@ -84,17 +94,6 @@ const reducer = (state, action) => {
 function App() {
 
   const [state, dispatch] = useReducer(reducer, initialState)
-
-  const [notes, setNotes] = useState([
-    {
-      id: 123,
-      category: "All",
-      icon: "fa-briefcase",
-      title: "This is the first note, click to open and edit your note",
-      content: "Select a note from the list on the left and then click the edit icon on the top right.  Enter you notes and then save!"
-    }
-  ]);
-
 
   //Load notes from Localstorage
   useEffect(() => {
@@ -112,22 +111,10 @@ function App() {
   //Search notes each state refresh
   useEffect(() => {
     searchNotes();
-    console.log(state);
   }, [state.selectedNoteID])
 
   const searchNotes = () => {
-    dispatch({type: 'foundNoteItem', payload: state.notes.find(noteItem => noteItem.id === state.selectedNoteID)})
-  }
-
-  const handleNoteChange = (event) => {
-    const { name, value } = event.target;
-    setNotes(
-      notes.map(noteItem => 
-        noteItem.id === state.selectedNoteID ? {
-          ...noteItem,
-              [name]: value
-        } : noteItem)
-    )
+    dispatch({type: 'foundNoteIndex', payload: state.notes.findIndex(noteItem => noteItem.id === state.selectedNoteID)})
   }
   
   return (
@@ -142,12 +129,10 @@ function App() {
                 setSelectedNote={(listItem) => dispatch({type: 'selectedNoteItem', payload: listItem.id})}
                 />
           <Note 
-                inputChange={handleNoteChange}
+                inputChange={(event) => dispatch({type: 'inputChange', payload: event.target})}
                 categoryChange={(item) => dispatch({type: 'noteCategoryChange', payload: item})}
-                // categoryChange={(value) => dispatch({type: 'noteCategoryChange', payload: value})}
                 deleteNote={(id) => dispatch({type: 'deleteNote', payload: id})}
-                // deleteNote={deleteNote}
-                notes={state.foundNote}
+                notes={state.notes[state.foundNoteIndex]}
                 />
         </Row>
       </Container>
