@@ -1,19 +1,36 @@
 import React, { Fragment } from "react";
 import SidebarLink from '../SidebarLink/SidebarLink';
-import categoryList from "./CategoryList";
+// import categoryList from "./CategoryList";
 
 
 function Categories(props){
 
     let uniqid = require('uniqid');
+    let categoryList = [];
+
 
     const handleClick = (event) => {
         props.setCategory(event.target.name)
     }
 
+    props.notes.map(noteItem => {
+        if(categoryList.find(category => category.name === noteItem.category)) {
+            const noteItemCategory = categoryList.findIndex(categoryItem => categoryItem.name === noteItem.category);
+            const categoryCount = props.notes.filter(categoryItem => categoryItem.category === noteItem.category)
+
+            return categoryList[noteItemCategory].count = categoryCount.length;
+        } else {
+            categoryList.push({name: noteItem.category, count: 1})
+            return null;
+        }
+        
+    })
+
+    console.log(categoryList);
+
     function buildCategoryList(item){
         return (
-            <SidebarLink click={handleClick} key={uniqid()} icon={item.icon} name={item.name} />
+            <SidebarLink click={handleClick} key={uniqid()} icon={item.icon} name={item.name} count={item.count}/>
         );
     }
 
