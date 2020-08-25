@@ -23,10 +23,7 @@ function Categories(props){
             categoryList.push({name: noteItem.category, count: 1})
             return null;
         }
-        
     })
-
-    console.log(categoryList);
 
     function buildCategoryList(item){
         return (
