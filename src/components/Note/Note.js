@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import styles from "./Note.module.css";
 import { Col, Row, OverlayTrigger, Popover } from "react-bootstrap";
-import Tooltip from 'react-bootstrap/Tooltip'
+import Tooltip from 'react-bootstrap/Tooltip';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 const Note = (props) => {
@@ -81,20 +82,20 @@ const Note = (props) => {
                         <ul>
                             <li>
                                 <OverlayTrigger placement="left" delay={{ show: 250, hide: 400 }} overlay={editNoteTooltip} >
-                                    <button onClick={handleClick}><i className="fas fa-edit" variant="success" alt="edit"/></button>
+                                    <button onClick={handleClick}><FontAwesomeIcon icon="edit" /></button>
                                 </OverlayTrigger>
                             </li>
                             <OverlayTrigger trigger="click" rootClose placement="left" overlay={categoryPopover}>
                                 <li>
                                     <OverlayTrigger placement="left" delay={{ show: 250, hide: 400 }} overlay={editCategory}>
-                                        <button variant="success"><i className="fas fa-tag"></i></button>
+                                        <button variant="success"><FontAwesomeIcon icon="tag" /></button>
                                     </OverlayTrigger>
                                 </li>
                             </OverlayTrigger>
                             <OverlayTrigger trigger="click" rootClose placement="left" overlay={deleteNotePopover}>
                                 <li>
                                     <OverlayTrigger rootCloseEvent="click" placement="left" delay={{ show: 250, hide: 400 }} overlay={deleteNoteTooltip}>
-                                        <button><i className="fas fa-trash"></i></button>
+                                        <button><FontAwesomeIcon icon="trash" /></button>
                                     </OverlayTrigger>
                                 </li>
                             </OverlayTrigger>
