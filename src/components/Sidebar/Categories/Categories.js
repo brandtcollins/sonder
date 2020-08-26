@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import SidebarLink from '../SidebarLink/SidebarLink';
-// import categoryList from "./CategoryList";
 
 
 function Categories(props){
@@ -12,7 +11,6 @@ function Categories(props){
     const handleClick = (event) => {
         props.setCategory(event.target.name)
     }
-
     props.notes.map(noteItem => {
         if(categoryList.find(category => category.name === noteItem.category)) {
             const noteItemCategory = categoryList.findIndex(categoryItem => categoryItem.name === noteItem.category);
@@ -27,7 +25,7 @@ function Categories(props){
 
     function buildCategoryList(item){
         return (
-            <SidebarLink click={handleClick} key={uniqid()} icon={item.icon} name={item.name} count={item.count}/>
+            <SidebarLink click={handleClick} category={item.name} key={uniqid()} icon={item.icon} name={item.name} count={item.count}/>
         );
     }
 
