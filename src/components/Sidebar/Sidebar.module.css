@@ -1,17 +1,17 @@
 .sidebar {
-  background-color: #2B2D42;
+  background-color: #2b2d42;
   color: #fff;
   height: 100vh;
 }
 
 .sidebar p {
   font-family: "Barlow";
-  font-size: .75rem;
+  font-size: 0.75rem;
   padding: 0;
   margin: 0;
   width: 100%;
 }
-  
+
 .sidebar svg {
   margin-top: 5px;
 }
@@ -24,8 +24,8 @@
 }
 
 .sidebar ul li {
-  color: #4C4F69;
-  margin: .35rem 0rem .25rem 0rem;
+  color: #4c4f69;
+  margin: 0.35rem 0rem 0.25rem 0rem;
   width: 90%;
   display: flex;
 }
@@ -38,7 +38,7 @@
 }
 
 .sidebar ul li:hover {
-  color: #EF233C;
+  color: #ef233c;
 }
 
 .sidebar .row {
@@ -46,12 +46,12 @@
 }
 
 .sidebar span {
-  font-size: .65rem;
+  font-size: 0.65rem;
   color: #fff;
   width: 22px;
   height: 22px;
   text-align: center;
-  background-color: #4C4F69;
+  background-color: #4c4f69;
   padding: 3px 3px;
   justify-self: flex-end;
   align-self: center;
@@ -70,7 +70,7 @@
   .sidebar .row ul li {
     font-size: 2rem;
     margin: 0 auto;
-    padding: .5rem 0;
+    padding: 0.5rem 0;
     width: 80px;
     text-align: center;
   }
