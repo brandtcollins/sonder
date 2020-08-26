@@ -1,9 +1,6 @@
-import { faBriefcase } from "@fortawesome/free-solid-svg-icons"
 
 const iconFinder = (category) => {
     switch (category) {
-        case "All":
-            return "briefcase"
         case "Fitness":
             return "heart"
         case "Work":

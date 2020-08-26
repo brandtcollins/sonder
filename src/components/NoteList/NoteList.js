@@ -48,7 +48,7 @@ const NoteList = (props) => {
                     content={item.content}
                     id={item.id}
                     key={item.id}
-                    icon={item.icon}
+                    icon={item.category}
                     active={item.id === props.selectedNote}
                     click={() => handleClick(item)}
                 />

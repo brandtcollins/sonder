@@ -51,7 +51,11 @@
   color: #6E6E6E;
 }
 
-.selected .noteCategory i {
+.noteCategory svg {
+  font-size: .85rem;
+}
+
+.selected .noteCategory svg {
   color: #EF233C;
 }
 
