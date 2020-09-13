@@ -154,11 +154,6 @@ function App() {
     localStorage.setItem("notes", JSON.stringify(state.notes));
   });
 
-  //Search notes each state refresh
-  useEffect(() => {
-    searchNotes();
-  }, [state.selectedNoteID]);
-
   const searchNotes = () => {
     dispatch({
       type: "foundNoteIndex",
@@ -167,6 +162,16 @@ function App() {
       ),
     });
   };
+
+  const updateSelectedNote = () => {
+    const newCategoryNote = state.notes.find(
+      (noteItem) => noteItem.category === state.category
+    );
+    dispatch({ type: "selectedNote", payload: newCategoryNote.id });
+  };
+
+  useEffect(searchNotes, [state.selectedNoteID]);
+  useEffect(updateSelectedNote, [state.category]);
 
   return (
     <Container fluid>
