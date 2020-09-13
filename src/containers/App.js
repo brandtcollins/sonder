@@ -80,7 +80,10 @@ const reducer = (state, action) => {
       const deletedNoteIndex = state.notes.findIndex(
         (noteItem) => noteItem.id === state.selectedNoteID
       );
-      const newNoteToDisplay = state.notes[deletedNoteIndex - 1].id;
+      const newNoteToDisplay =
+        deletedNoteIndex === 0
+          ? state.notes[deletedNoteIndex + 1].id
+          : state.notes[deletedNoteIndex - 1].id;
       return {
         ...state,
         selectedNoteID: newNoteToDisplay,
@@ -140,7 +143,6 @@ const reducer = (state, action) => {
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
-
   //Load notes from Localstorage
   useEffect(() => {
     const data = localStorage.getItem("notes");
