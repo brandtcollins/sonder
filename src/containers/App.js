@@ -40,7 +40,7 @@ const initialState = {
   notes: [
     {
       id: 123,
-      category: "All",
+      category: "General",
       icon: "fa-briefcase",
       title: "This is the first note, click to open and edit your note",
       content:
@@ -49,7 +49,7 @@ const initialState = {
   ],
   selectedNoteID: 123,
   foundNoteIndex: 0,
-  category: "All",
+  category: "General",
 };
 
 const reducer = (state, action) => {

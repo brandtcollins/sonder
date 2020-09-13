@@ -6,18 +6,28 @@ import { Row, Col } from "react-bootstrap";
 import styles from "./Sidebar.module.css";
 
 const Sidebar = (props) => {
+  const { notes, setCategory } = props;
+
+  const handleClick = (event) => {
+    setCategory(event.target.name);
+  };
+
   return (
     <Col xs={2} className={styles.sidebar}>
       <Avatar />
       <Row className={styles.row}>
         <p>NOTES</p>
         <ul>
-          <SidebarLink icon="fa-file-alt" name="View All" />
+          <SidebarLink click={handleClick} icon="fa-file-alt" name="All" />
           <SidebarLink icon="fa-trash" name="Deleted" />
         </ul>
       </Row>
       <Row className={styles.row}>
-        <Categories notes={props.notes} setCategory={props.setCategory} />
+        <Categories
+          handleClick={handleClick}
+          notes={notes}
+          setCategory={setCategory}
+        />
       </Row>
       <Row className={styles.row}>
         <p>SIGN UP</p>

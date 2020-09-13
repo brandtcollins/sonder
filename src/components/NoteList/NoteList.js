@@ -9,7 +9,7 @@ import titleGenerator from "../../utils/titleGenerator/titleGenerator";
 let uniqid = require("uniqid");
 
 const NoteList = (props) => {
-  const { notes, category, createNote, setSelectedNote } = props;
+  const { notes, category, createNote, setSelectedNote, selectedNote } = props;
 
   const [newNote, setNewNote] = useState({
     id: uniqid(),
@@ -33,7 +33,6 @@ const NoteList = (props) => {
       title: titleGenerator(),
       content: quoteGenerator(),
     });
-    console.log(`Submit note category is: ${category}`);
   };
 
   useEffect(categoryChange, [category]);
@@ -47,9 +46,9 @@ const NoteList = (props) => {
       <RoundButton onClick={submitNote}>Create a new note</RoundButton>
       {notes
         .filter(
-          props.category === "All"
+          category === "All"
             ? (noteItem) => noteItem.category !== "Deleted"
-            : (noteItem) => noteItem.category === props.category
+            : (noteItem) => noteItem.category === category
         )
         .map((item, index) => (
           <ListItem
@@ -58,7 +57,7 @@ const NoteList = (props) => {
             id={item.id}
             key={item.id}
             icon={item.category}
-            active={item.id === props.selectedNote}
+            active={item.id === selectedNote}
             click={() => handleClick(item)}
           />
         ))}

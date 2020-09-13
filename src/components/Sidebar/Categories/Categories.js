@@ -1,19 +1,17 @@
-import React, { Fragment } from "react";
+import React from "react";
 import SidebarLink from "../SidebarLink/SidebarLink";
 
 function Categories(props) {
+  const { notes, handleClick } = props;
   let uniqid = require("uniqid");
   let categoryList = [];
 
-  const handleClick = (event) => {
-    props.setCategory(event.target.name);
-  };
-  props.notes.map((noteItem) => {
+  notes.map((noteItem) => {
     if (categoryList.find((category) => category.name === noteItem.category)) {
       const noteItemCategory = categoryList.findIndex(
         (categoryItem) => categoryItem.name === noteItem.category
       );
-      const categoryCount = props.notes.filter(
+      const categoryCount = notes.filter(
         (categoryItem) => categoryItem.category === noteItem.category
       );
 
@@ -37,11 +35,13 @@ function Categories(props) {
     );
   }
 
+  console.log(notes);
+
   return (
-    <Fragment>
+    <>
       <p>CATEGORIES</p>
       <ul>{categoryList.map(buildCategoryList)}</ul>
-    </Fragment>
+    </>
   );
 }
 

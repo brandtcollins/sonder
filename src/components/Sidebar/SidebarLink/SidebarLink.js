@@ -3,13 +3,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import iconFinder from "../../../utils/iconFinder/iconFinder";
 
 const SidebarLink = (props) => {
+  const { click, category, name, count } = props;
   return (
-    <li onClick={props.click}>
-      <FontAwesomeIcon icon={iconFinder(props.category)} />
-      <a href="/#" name={props.name}>
-        {props.name}
+    <li onClick={click}>
+      <FontAwesomeIcon icon={iconFinder(category)} />
+      <a href="/#" name={name}>
+        {name}
       </a>{" "}
-      {props.count ? <span>{props.count}</span> : null}
+      {count ? <span>{count}</span> : null}
     </li>
   );
 };
