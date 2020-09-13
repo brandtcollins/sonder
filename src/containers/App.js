@@ -143,6 +143,7 @@ const reducer = (state, action) => {
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
+
   //Load notes from Localstorage
   useEffect(() => {
     const data = localStorage.getItem("notes");

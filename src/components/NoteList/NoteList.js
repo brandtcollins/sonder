@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./NoteList.module.css";
 import ListItem from "./NoteListItem/NoteListItem";
 import { Col } from "react-bootstrap";
@@ -9,7 +9,7 @@ import titleGenerator from "../../utils/titleGenerator/titleGenerator";
 let uniqid = require("uniqid");
 
 const NoteList = (props) => {
-  const { notes, category } = props;
+  const { notes, category, createNote, setSelectedNote } = props;
 
   const [newNote, setNewNote] = useState({
     id: uniqid(),
@@ -19,10 +19,13 @@ const NoteList = (props) => {
     content: quoteGenerator(),
   });
 
-  //Action for the 'Create a Note', pushes new note on the list to App.js
   const submitNote = (event) => {
-    props.createNote(newNote);
-    //Change newNote's ID each time a new note is created
+    createNote(newNote);
+    categoryChange();
+    event.preventDefault();
+  };
+
+  const categoryChange = () => {
     setNewNote({
       id: uniqid(),
       category: category,
@@ -30,12 +33,13 @@ const NoteList = (props) => {
       title: titleGenerator(),
       content: quoteGenerator(),
     });
-    event.preventDefault();
+    console.log(`Submit note category is: ${category}`);
   };
 
-  //Click event handler to change styles on list items.
+  useEffect(categoryChange, [category]);
+
   const handleClick = (item) => {
-    props.setSelectedNote(item);
+    setSelectedNote(item);
   };
 
   return (
