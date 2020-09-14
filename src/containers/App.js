@@ -76,7 +76,6 @@ const reducer = (state, action) => {
           },
         ],
       };
-
     case "deleteNote":
       const categoryArr = state.notes.filter(
         (noteItem) => noteItem.category === state.category
@@ -90,11 +89,6 @@ const reducer = (state, action) => {
         deletedNoteIndex === 0
           ? categoryArr[deletedNoteIndex + 1].id
           : categoryArr[deletedNoteIndex - 1].id;
-      // return {
-      //   ...state,
-      //   selectedNoteID: newNoteToDisplay,
-      //   notes: state.notes.filter((noteItem) => noteItem.id !== payload),
-      // };
       return produce(state, (draft) => {
         draft.selectedNoteID = newNoteToDisplay;
         draft.notes = state.notes.filter((noteItem) => noteItem.id !== payload);
@@ -112,11 +106,10 @@ const reducer = (state, action) => {
       const firstNoteInCategory = state.notes.find(
         (noteItem) => noteItem.category === state.category
       );
-      return {
-        ...state,
-        category: payload,
-        selectedNoteID: firstNoteInCategory.id,
-      };
+      return produce(state, (draft) => {
+        draft.category = payload;
+        draft.selectedNoteID = firstNoteInCategory.id;
+      });
 
     case "noteCategoryChange":
       const updatedNotes = state.notes.map((noteItem) =>
@@ -141,7 +134,6 @@ const reducer = (state, action) => {
             }
           : noteItem
       );
-
       return produce(state, (draft) => {
         draft.notes = updatedInputs;
       });
