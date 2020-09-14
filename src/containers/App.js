@@ -94,6 +94,7 @@ const reducer = (state, action) => {
         ...state,
         selectedNoteID: payload,
       };
+
     case "foundNoteIndex":
       return {
         ...state,
@@ -142,9 +143,8 @@ const reducer = (state, action) => {
 };
 
 function App() {
+  console.log();
   const [state, dispatch] = useReducer(reducer, initialState);
-
-  //Load notes from Localstorage
   useEffect(() => {
     const data = localStorage.getItem("notes");
     if (data) {
@@ -152,17 +152,21 @@ function App() {
     }
   }, []);
 
-  //Save notes to localstorage as well as search note for Note.js to display
   useEffect(() => {
     localStorage.setItem("notes", JSON.stringify(state.notes));
   });
 
   const searchNotes = () => {
+    const noteIndex =
+      state.category === "All"
+        ? 0
+        : state.notes.findIndex(
+            (noteItem) => noteItem.id === state.selectedNoteID
+          );
+
     dispatch({
       type: "foundNoteIndex",
-      payload: state.notes.findIndex(
-        (noteItem) => noteItem.id === state.selectedNoteID
-      ),
+      payload: noteIndex,
     });
   };
 
@@ -170,7 +174,9 @@ function App() {
     const newCategoryNote = state.notes.find(
       (noteItem) => noteItem.category === state.category
     );
-    dispatch({ type: "selectedNote", payload: newCategoryNote.id });
+    if (newCategoryNote) {
+      dispatch({ type: "selectedNote", payload: newCategoryNote.id });
+    }
   };
 
   useEffect(searchNotes, [state.selectedNoteID]);

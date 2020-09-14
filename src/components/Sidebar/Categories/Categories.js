@@ -34,9 +34,6 @@ function Categories(props) {
       />
     );
   }
-
-  console.log(notes);
-
   return (
     <>
       <p>CATEGORIES</p>
