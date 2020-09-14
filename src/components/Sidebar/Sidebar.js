@@ -8,7 +8,6 @@ const Sidebar = (props) => {
   const { notes, setCategory } = props;
 
   const handleClick = (event) => {
-    console.log(event.target.name);
     setCategory(event.target.name);
   };
 

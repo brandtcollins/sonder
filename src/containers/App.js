@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
+import produce from "immer";
 import {
   faBriefcase,
   faHashtag,
@@ -58,10 +59,9 @@ const reducer = (state, action) => {
 
   switch (action.type) {
     case "loadLocalStorage":
-      return {
-        ...state,
-        notes: payload,
-      };
+      return produce(state, (draft) => {
+        draft.notes = payload;
+      });
     case "createNewNote":
       return {
         ...state,
@@ -76,39 +76,48 @@ const reducer = (state, action) => {
           },
         ],
       };
+
     case "deleteNote":
-      const deletedNoteIndex = state.notes.findIndex(
+      const categoryArr = state.notes.filter(
+        (noteItem) => noteItem.category === state.category
+      );
+
+      const deletedNoteIndex = categoryArr.findIndex(
         (noteItem) => noteItem.id === state.selectedNoteID
       );
+
       const newNoteToDisplay =
         deletedNoteIndex === 0
-          ? state.notes[deletedNoteIndex + 1].id
-          : state.notes[deletedNoteIndex - 1].id;
-      return {
-        ...state,
-        selectedNoteID: newNoteToDisplay,
-        notes: state.notes.filter((noteItem) => noteItem.id !== payload),
-      };
+          ? categoryArr[deletedNoteIndex + 1].id
+          : categoryArr[deletedNoteIndex - 1].id;
+      // return {
+      //   ...state,
+      //   selectedNoteID: newNoteToDisplay,
+      //   notes: state.notes.filter((noteItem) => noteItem.id !== payload),
+      // };
+      return produce(state, (draft) => {
+        draft.selectedNoteID = newNoteToDisplay;
+        draft.notes = state.notes.filter((noteItem) => noteItem.id !== payload);
+      });
     case "selectedNote":
-      return {
-        ...state,
-        selectedNoteID: payload,
-      };
+      return produce(state, (draft) => {
+        draft.selectedNoteID = payload;
+      });
 
     case "foundNoteIndex":
-      return {
-        ...state,
-        foundNoteIndex: payload,
-      };
+      return produce(state, (draft) => {
+        draft.foundNoteIndex = payload;
+      });
     case "setCategory":
-      const newCategoryNote = state.notes.find(
+      const firstNoteInCategory = state.notes.find(
         (noteItem) => noteItem.category === state.category
       );
       return {
         ...state,
         category: payload,
-        selectedNoteID: newCategoryNote.id,
+        selectedNoteID: firstNoteInCategory.id,
       };
+
     case "noteCategoryChange":
       const updatedNotes = state.notes.map((noteItem) =>
         noteItem.id === state.selectedNoteID
@@ -118,11 +127,10 @@ const reducer = (state, action) => {
             }
           : noteItem
       );
+      return produce(state, (draft) => {
+        draft.notes = updatedNotes;
+      });
 
-      return {
-        ...state,
-        notes: updatedNotes,
-      };
     case "inputChange":
       const { name, value } = payload;
       const updatedInputs = state.notes.map((noteItem) =>
@@ -133,18 +141,18 @@ const reducer = (state, action) => {
             }
           : noteItem
       );
-      return {
-        ...state,
-        notes: updatedInputs,
-      };
+
+      return produce(state, (draft) => {
+        draft.notes = updatedInputs;
+      });
     default:
       return state;
   }
 };
 
 function App() {
-  console.log();
   const [state, dispatch] = useReducer(reducer, initialState);
+
   useEffect(() => {
     const data = localStorage.getItem("notes");
     if (data) {
