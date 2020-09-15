@@ -8,7 +8,9 @@ const Sidebar = (props) => {
   const { notes, setCategory } = props;
 
   const handleClick = (event) => {
-    setCategory(event.target.name);
+    let parent = event.target.closest("li").getAttribute("name");
+    console.log(event.target);
+    setCategory(parent);
   };
 
   return (

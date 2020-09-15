@@ -49,6 +49,14 @@ const initialState = {
       content:
         "Select a note from the list on the left and then click the edit icon on the top right.  Enter your notes and then save!",
     },
+    {
+      id: 345,
+      category: "Work",
+      icon: "fa-briefcase",
+      title: "This is the second note, click to open and edit your note",
+      content:
+        "Select a note from the list on the left and then click the edit icon on the top right.  Enter your notes and then save!",
+    },
   ],
   selectedNoteID: 123,
   foundNoteIndex: 0,
@@ -178,7 +186,6 @@ const reducer = (state, action) => {
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  console.log(state);
   useEffect(() => {
     const data = localStorage.getItem("notes");
     if (data) {
