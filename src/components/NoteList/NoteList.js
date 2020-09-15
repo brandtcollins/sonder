@@ -62,7 +62,7 @@ const NoteList = (props) => {
   return (
     <Col className={styles.noteList}>
       <RoundButton onClick={submitNote}>Create a new note</RoundButton>
-      {filteredList.length >= 0 ? (
+      {filteredList.length > 0 ? (
         filteredList
           .filter((noteItem) => noteItem.category === category)
           .map((item) => (

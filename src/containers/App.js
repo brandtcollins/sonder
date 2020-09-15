@@ -57,8 +57,9 @@ const initialState = {
     id: 123,
     category: "General",
     icon: "fa-briefcase",
-    title: "You've cleared out all the notes in this category!",
-    content: "Click the create button above to make a new note.",
+    title: "Well, this is awkward.",
+    content:
+      "You've deleted all the notes in this category, create a new note or select a different category in the sidebar.",
   },
 };
 
@@ -125,9 +126,19 @@ const reducer = (state, action) => {
         draft.foundNoteIndex = payload;
       });
     case "setCategory":
-      const firstNoteInCategory = state.notes.find(
+      const categoryArray = state.notes.filter(
         (noteItem) => noteItem.category === state.category
       );
+      let firstNoteInCategory;
+
+      if (categoryArray.length === 0) {
+        firstNoteInCategory = state.notes[0];
+      } else {
+        firstNoteInCategory = state.notes.find(
+          (noteItem) => noteItem.category === state.category
+        );
+      }
+
       return produce(state, (draft) => {
         draft.category = payload;
         draft.selectedNoteID = firstNoteInCategory.id;
@@ -167,7 +178,7 @@ const reducer = (state, action) => {
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
-
+  console.log(state);
   useEffect(() => {
     const data = localStorage.getItem("notes");
     if (data) {

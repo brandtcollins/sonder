@@ -9,8 +9,8 @@ const SidebarLink = (props) => {
       <FontAwesomeIcon icon={iconFinder(category)} />
       <a href="/#" name={name}>
         {name}
-      </a>{" "}
-      {count ? <span>{count}</span> : null}
+      </a>
+      {count && <span>{count}</span>}
     </li>
   );
 };
