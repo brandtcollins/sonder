@@ -51,6 +51,7 @@ const NoteNav = (props) => {
       <Popover.Content>
         <form onSubmit={handleSubmit}>
           <input
+            maxLength="12"
             className={styles.categoryInput}
             onChange={(event) => {
               setValue(event.target.value);
