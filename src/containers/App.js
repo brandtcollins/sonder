@@ -53,6 +53,13 @@ const initialState = {
   selectedNoteID: 123,
   foundNoteIndex: 0,
   category: "General",
+  blankNote: {
+    id: 123,
+    category: "General",
+    icon: "fa-briefcase",
+    title: "You've cleared out all the notes in this category!",
+    content: "Click the create button above to make a new note.",
+  },
 };
 
 const reducer = (state, action) => {
@@ -87,12 +94,25 @@ const reducer = (state, action) => {
         (noteItem) => noteItem.id === state.selectedNoteID
       );
 
-      const newNoteToDisplay =
-        deletedNoteIndex === 0
-          ? categoryArr[deletedNoteIndex + 1].id
-          : categoryArr[deletedNoteIndex - 1].id;
+      let testingVar;
+
+      const newNoteToDisplay = () => {
+        if (deletedNoteIndex === 0 && categoryArr.length > 1) {
+          console.log(`1st conditional`);
+          testingVar = categoryArr[deletedNoteIndex + 1].id;
+        } else if (deletedNoteIndex === 0 && categoryArr.length <= 1) {
+          console.log(`2nd conditional`);
+          console.log(state.blankNote);
+          testingVar = state.blankNote.id;
+        } else {
+          console.log(`3rd conditional`);
+          testingVar = categoryArr[deletedNoteIndex - 1].id;
+        }
+      };
+      newNoteToDisplay();
+
       return produce(state, (draft) => {
-        draft.selectedNoteID = newNoteToDisplay;
+        draft.selectedNoteID = testingVar;
         draft.notes = state.notes.filter((noteItem) => noteItem.id !== payload);
       });
     case "selectedNote":
@@ -124,6 +144,7 @@ const reducer = (state, action) => {
       );
       return produce(state, (draft) => {
         draft.notes = updatedNotes;
+        draft.category = payload;
       });
 
     case "inputChange":
@@ -160,7 +181,7 @@ function App() {
 
   const searchNotes = () => {
     const noteIndex =
-      state.category === "All"
+      state.selectedNoteID === 123
         ? 0
         : state.notes.findIndex(
             (noteItem) => noteItem.id === state.selectedNoteID
@@ -183,7 +204,6 @@ function App() {
 
   useEffect(searchNotes, [state.selectedNoteID]);
   useEffect(updateSelectedNote, [state.category]);
-
   return (
     <Container fluid>
       <Row>
@@ -199,7 +219,7 @@ function App() {
           }
           notes={state.notes}
           category={state.category}
-          selectedNote={state.selectedNoteID}
+          selectedNoteID={state.selectedNoteID}
           setSelectedNote={(listItem) =>
             dispatch({ type: "selectedNote", payload: listItem.id })
           }
@@ -212,7 +232,11 @@ function App() {
             dispatch({ type: "noteCategoryChange", payload: item })
           }
           deleteNote={(id) => dispatch({ type: "deleteNote", payload: id })}
-          notes={state.notes[state.foundNoteIndex]}
+          notes={
+            state.selectedNoteID === 123
+              ? state.blankNote
+              : state.notes[state.foundNoteIndex]
+          }
         />
       </Row>
     </Container>

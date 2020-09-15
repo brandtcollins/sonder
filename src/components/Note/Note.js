@@ -13,6 +13,7 @@ const Note = (props) => {
     event.preventDefault();
     console.log(`Submit sent`);
   };
+
   return (
     <Col xs={6}>
       <Row>

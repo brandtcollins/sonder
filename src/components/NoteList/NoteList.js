@@ -5,11 +5,19 @@ import { Col } from "react-bootstrap";
 import RoundButton from "../Button/Button";
 import quoteGenerator from "../../utils/quoteGenerator/quoteGenerator";
 import titleGenerator from "../../utils/titleGenerator/titleGenerator";
+import EmptyListItem from "./NoteListItem/EmptyListItem";
 
 let uniqid = require("uniqid");
 
 const NoteList = (props) => {
-  const { notes, category, createNote, setSelectedNote, selectedNote } = props;
+  const {
+    notes,
+    category,
+    createNote,
+    setSelectedNote,
+    selectedNoteID,
+  } = props;
+  let filteredList;
 
   const [newNote, setNewNote] = useState({
     id: uniqid(),
@@ -41,26 +49,36 @@ const NoteList = (props) => {
     setSelectedNote(item);
   };
 
+  const listGenerator = () => {
+    let notesByCategory = notes.filter(
+      (noteItem) => noteItem.category === category
+    );
+
+    filteredList = notesByCategory;
+  };
+
+  listGenerator();
+
   return (
     <Col className={styles.noteList}>
       <RoundButton onClick={submitNote}>Create a new note</RoundButton>
-      {notes
-        .filter(
-          category === "All"
-            ? (noteItem) => noteItem.category !== "Deleted"
-            : (noteItem) => noteItem.category === category
-        )
-        .map((item, index) => (
-          <ListItem
-            title={item.title}
-            content={item.content}
-            id={item.id}
-            key={item.id}
-            icon={item.category}
-            active={item.id === selectedNote}
-            click={() => handleClick(item)}
-          />
-        ))}
+      {filteredList.length >= 0 ? (
+        filteredList
+          .filter((noteItem) => noteItem.category === category)
+          .map((item) => (
+            <ListItem
+              title={item.title}
+              content={item.content}
+              id={item.id}
+              key={item.id}
+              icon={item.category}
+              active={item.id === selectedNoteID}
+              click={() => handleClick(item)}
+            />
+          ))
+      ) : (
+        <EmptyListItem />
+      )}
     </Col>
   );
 };
