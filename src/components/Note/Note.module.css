@@ -42,7 +42,7 @@
   font-family: Poppins;
   width: 100%;
   border: none;
-  outline: none;
+
   resize: none;
   overflow: auto;
   flex: 1;
@@ -52,7 +52,7 @@
   font-family: "Courier New", Courier, monospace;
   width: 100%;
   border: none;
-  outline: none;
+
   border: 1px solid #e4e4e4;
   resize: none;
   margin: 0 0 50px 0;
@@ -90,9 +90,22 @@
   color: #e4e4e4;
 }
 
+.noteNav button:focus {
+  outline: none;
+}
+
 .noteNav i:hover {
   color: red;
   font-size: 1.5rem;
+}
+
+.active {
+  color: red;
+  transition: 0.73s all ease-in-out;
+}
+.inactive {
+  color: #e4e4e4;
+  transition: 0.1s all ease-in-out;
 }
 
 .noteNav ul {

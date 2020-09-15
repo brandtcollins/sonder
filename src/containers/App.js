@@ -19,6 +19,7 @@ import {
   faPaw,
   faEdit,
   faTag,
+  faSave,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -34,6 +35,7 @@ library.add(
   faPaw,
   faEdit,
   faTag,
+  faSave,
   faTrash
 );
 

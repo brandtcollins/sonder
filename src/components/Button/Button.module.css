@@ -1,17 +1,23 @@
 .button {
   font-family: "Barlow";
   font-size: 1.15rem;
-  color: #b5babd;
+  color: #ec707e;
   margin: 10px 10px;
   padding: 15px 10px;
-  background-color: #e2e8eb;
-  border: 1px solid #e2e8eb;
+  background-color: white;
+  border: 1px solid #b4cbd4;
   width: 95%;
   border-radius: 35px 35px;
 }
 
 .button:hover {
-  color: #ef233c;
-  background-color: white;
   border: 1px solid #b4cbd4;
+  color: #ef233c;
+
+  box-shadow: 0px 0px 5px rgba(160, 160, 160, 0.5);
+  transition: 0.25s all ease-in-out;
+}
+
+.button:focus {
+  outline: none;
 }

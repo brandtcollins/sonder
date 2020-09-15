@@ -1,86 +1,28 @@
 import React, { useState } from "react";
 import styles from "./Note.module.css";
-import { Col, Row, OverlayTrigger, Popover } from "react-bootstrap";
-import Tooltip from "react-bootstrap/Tooltip";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Col, Row } from "react-bootstrap";
+import NoteNav from "./NoteNav";
 
 const Note = (props) => {
-  const [disabledNoteFields, setDisabledNoteFields] = useState(true);
-  const [value, setValue] = useState("");
-
   const { id, title, content, category } = props.notes;
+  const { inputChange, deleteNote, categoryChange } = props;
 
-  const handleClick = (event) => {
-    if (disabledNoteFields) {
-      setDisabledNoteFields(false);
-    } else if (!disabledNoteFields) {
-      setDisabledNoteFields(true);
-    }
-  };
+  const [disabledNoteFields, setDisabledNoteFields] = useState(true);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setValue("");
-    props.categoryChange(value);
+    console.log(`Submit sent`);
   };
-
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
-
-  const editNoteTooltip = (props) => (
-    <Tooltip id="button-tooltip" {...props}>
-      Edit Note
-    </Tooltip>
-  );
-  const editCategory = (props) => (
-    <Tooltip id="button-tooltip" {...props}>
-      Edit Category
-    </Tooltip>
-  );
-  const deleteNoteTooltip = (props) => (
-    <Tooltip id="button-tooltip" {...props}>
-      Delete Note
-    </Tooltip>
-  );
-
-  const categoryPopover = (
-    <Popover id="popover-basic">
-      <Popover.Title as="h3">Enter Note Category</Popover.Title>
-      <Popover.Content>
-        <form onSubmit={handleSubmit}>
-          <input
-            className={styles.categoryInput}
-            onChange={handleChange}
-            placeholder={`Current category: ${category}`}
-            value={value}
-          ></input>
-        </form>
-      </Popover.Content>
-    </Popover>
-  );
-
-  const deleteNotePopover = (
-    <Popover id="popover-basic">
-      <Popover.Title as="h3">Are you sure you want to delete?</Popover.Title>
-      <Popover.Content>
-        <button className={styles.button} onClick={() => props.deleteNote(id)}>
-          Yes, delete this note.
-        </button>
-      </Popover.Content>
-    </Popover>
-  );
-
   return (
     <Col xs={6}>
       <Row>
         <Col xs={11}>
-          <div className={styles.Note}>
+          <form className={styles.Note} name="note" onSubmit={handleSubmit}>
             <textarea
               className={styles.noteHeadline}
               name="title"
               value={title}
-              onChange={props.inputChange}
+              onChange={inputChange}
               wrap="hard"
               rows="3"
               disabled={disabledNoteFields ? true : false}
@@ -89,65 +31,19 @@ const Note = (props) => {
               className={styles.noteBody}
               name="content"
               value={content}
-              onChange={props.inputChange}
+              onChange={inputChange}
               disabled={disabledNoteFields ? true : false}
             />
-          </div>
+          </form>
         </Col>
-        <Col xs={1}>
-          <div className={styles.noteNav}>
-            <ul>
-              <li>
-                <OverlayTrigger
-                  placement="left"
-                  delay={{ show: 250, hide: 400 }}
-                  overlay={editNoteTooltip}
-                >
-                  <button onClick={handleClick}>
-                    <FontAwesomeIcon icon="edit" />
-                  </button>
-                </OverlayTrigger>
-              </li>
-              <OverlayTrigger
-                trigger="click"
-                rootClose
-                placement="left"
-                overlay={categoryPopover}
-              >
-                <li>
-                  <OverlayTrigger
-                    placement="left"
-                    delay={{ show: 250, hide: 400 }}
-                    overlay={editCategory}
-                  >
-                    <button variant="success">
-                      <FontAwesomeIcon icon="tag" />
-                    </button>
-                  </OverlayTrigger>
-                </li>
-              </OverlayTrigger>
-              <OverlayTrigger
-                trigger="click"
-                rootClose
-                placement="left"
-                overlay={deleteNotePopover}
-              >
-                <li>
-                  <OverlayTrigger
-                    rootCloseEvent="click"
-                    placement="left"
-                    delay={{ show: 250, hide: 400 }}
-                    overlay={deleteNoteTooltip}
-                  >
-                    <button>
-                      <FontAwesomeIcon icon="trash" />
-                    </button>
-                  </OverlayTrigger>
-                </li>
-              </OverlayTrigger>
-            </ul>
-          </div>
-        </Col>
+        <NoteNav
+          category={category}
+          categoryChange={categoryChange}
+          id={id}
+          disabledNoteFields={disabledNoteFields}
+          setDisabledNoteFields={setDisabledNoteFields}
+          deleteNote={deleteNote}
+        />
       </Row>
     </Col>
   );
