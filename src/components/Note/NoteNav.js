@@ -3,6 +3,7 @@ import { Col, OverlayTrigger, Popover } from "react-bootstrap";
 import Tooltip from "react-bootstrap/Tooltip";
 import styles from "./Note.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+let _ = require("lodash");
 
 const NoteNav = (props) => {
   const {
@@ -19,7 +20,7 @@ const NoteNav = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     setValue("");
-    categoryChange(value);
+    categoryChange(_.startCase(_.toLower(value)));
   };
 
   const handleClick = (event) => {

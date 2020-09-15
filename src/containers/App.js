@@ -49,20 +49,12 @@ const initialState = {
       content:
         "Select a note from the list on the left and then click the edit icon on the top right.  Enter your notes and then save!",
     },
-    {
-      id: 345,
-      category: "Work",
-      icon: "fa-briefcase",
-      title: "This is the second note, click to open and edit your note",
-      content:
-        "Select a note from the list on the left and then click the edit icon on the top right.  Enter your notes and then save!",
-    },
   ],
   selectedNoteID: 123,
   foundNoteIndex: 0,
   category: "General",
   blankNote: {
-    id: 123,
+    id: 5555,
     category: "General",
     icon: "fa-briefcase",
     title: "Well, this is awkward.",
@@ -199,7 +191,7 @@ function App() {
 
   const searchNotes = () => {
     const noteIndex =
-      state.selectedNoteID === 123
+      state.selectedNoteID === 5555
         ? 0
         : state.notes.findIndex(
             (noteItem) => noteItem.id === state.selectedNoteID
@@ -251,7 +243,7 @@ function App() {
           }
           deleteNote={(id) => dispatch({ type: "deleteNote", payload: id })}
           notes={
-            state.selectedNoteID === 123
+            state.selectedNoteID === 5555
               ? state.blankNote
               : state.notes[state.foundNoteIndex]
           }
