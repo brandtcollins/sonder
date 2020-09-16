@@ -3,9 +3,14 @@ import styles from "../NoteList.module.css";
 import { Col, Row } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import iconFinder from "../../../utils/iconFinder/iconFinder";
+import moment from "moment";
 
 const ListItem = (props) => {
-  const { active, id, icon, click, title, content } = props;
+  const { active, id, icon, click, title, content, time } = props;
+
+  const today = moment().from(time);
+
+  console.log(today);
 
   return (
     <Col
@@ -17,7 +22,9 @@ const ListItem = (props) => {
       <Row>
         <Col onClick={click} id={id} className={styles.noteCategory} xs={2}>
           <p>
-            15D
+            Just
+            <br />
+            Now
             <br />
             <FontAwesomeIcon icon={iconFinder(icon)} />
           </p>

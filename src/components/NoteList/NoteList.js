@@ -58,7 +58,6 @@ const NoteList = (props) => {
   };
 
   listGenerator();
-
   return (
     <Col className={styles.noteList}>
       <RoundButton onClick={submitNote}>Create a new note</RoundButton>
@@ -71,6 +70,7 @@ const NoteList = (props) => {
               content={item.content}
               id={item.id}
               key={item.id}
+              time={item.time}
               icon={item.category}
               active={item.id === selectedNoteID}
               click={() => handleClick(item)}
