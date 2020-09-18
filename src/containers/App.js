@@ -67,7 +67,6 @@ const initialState = {
 const reducer = (state, action) => {
   const { payload } = action;
   const { id, title, content, icon, category } = action.payload;
-
   switch (action.type) {
     case "loadLocalStorage":
       return produce(state, (draft) => {
@@ -179,6 +178,7 @@ const reducer = (state, action) => {
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
+
   useEffect(() => {
     const data = localStorage.getItem("notes");
     if (data) {

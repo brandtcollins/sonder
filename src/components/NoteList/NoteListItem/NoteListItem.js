@@ -3,14 +3,9 @@ import styles from "../NoteList.module.css";
 import { Col, Row } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import iconFinder from "../../../utils/iconFinder/iconFinder";
-import moment from "moment";
 
 const ListItem = (props) => {
-  const { active, id, icon, click, title, content, time } = props;
-
-  const today = moment().from(time);
-
-  console.log(today);
+  const { active, id, icon, click, title, content } = props;
 
   return (
     <Col
