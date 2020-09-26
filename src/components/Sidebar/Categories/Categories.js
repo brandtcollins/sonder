@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import SidebarLink from "../SidebarLink/SidebarLink";
+import { NoteContext } from "../../../context/NoteContext";
 
 function Categories(props) {
-  const { notes, handleClick } = props;
+  const noteContext = useContext(NoteContext);
+  const { handleClick } = props;
+  const { notes } = noteContext.state;
   let uniqid = require("uniqid");
   let categoryList = [];
+  console.log(noteContext.state);
 
   notes.map((noteItem) => {
     if (categoryList.find((category) => category.name === noteItem.category)) {

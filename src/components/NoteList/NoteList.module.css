@@ -52,7 +52,8 @@
 }
 
 .noteCategory svg {
-  font-size: 0.85rem;
+  font-size: 1rem;
+  margin: 0.5rem 0 0 0;
 }
 
 .selected .noteCategory svg {

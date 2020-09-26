@@ -55,12 +55,7 @@ function App() {
   return (
     <Container fluid>
       <Row>
-        <Sidebar
-          notes={state.notes}
-          setCategory={(categoryName) =>
-            dispatch({ type: "setCategory", payload: categoryName })
-          }
-        />
+        <Sidebar />
         <NoteList
           createNote={(newNote) =>
             dispatch({ type: "createNewNote", payload: newNote })
