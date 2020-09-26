@@ -57,20 +57,7 @@ function App() {
       <Row>
         <Sidebar />
         <NoteList />
-        <Note
-          inputChange={(event) =>
-            dispatch({ type: "inputChange", payload: event.target })
-          }
-          categoryChange={(item) =>
-            dispatch({ type: "noteCategoryChange", payload: item })
-          }
-          deleteNote={(id) => dispatch({ type: "deleteNote", payload: id })}
-          notes={
-            state.selectedNoteID === 5555
-              ? state.blankNote
-              : state.notes[state.foundNoteIndex]
-          }
-        />
+        <Note />
       </Row>
     </Container>
   );

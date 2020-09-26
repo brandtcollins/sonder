@@ -1,17 +1,25 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./Note.module.css";
 import { Col, Row } from "react-bootstrap";
 import NoteNav from "./NoteNav";
+import { NoteContext } from "../../context/NoteContext";
 
 const Note = (props) => {
-  const { id, title, content, category } = props.notes;
-  const { inputChange, deleteNote, categoryChange } = props;
-
+  const { state, dispatch } = useContext(NoteContext);
+  const { id, title, content, category } =
+    state.selectedNoteID === 5555
+      ? state.blankNote
+      : state.notes[state.foundNoteIndex];
+  const { deleteNote, categoryChange } = props;
   const [disabledNoteFields, setDisabledNoteFields] = useState(true);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(`Submit sent`);
+  };
+
+  const onChangeHandler = (event) => {
+    dispatch({ type: "inputChange", payload: event.target });
   };
 
   return (
@@ -23,7 +31,7 @@ const Note = (props) => {
               className={styles.noteHeadline}
               name="title"
               value={title}
-              onChange={inputChange}
+              onChange={onChangeHandler}
               wrap="hard"
               rows="3"
               disabled={disabledNoteFields ? true : false}
@@ -32,18 +40,16 @@ const Note = (props) => {
               className={styles.noteBody}
               name="content"
               value={content}
-              onChange={inputChange}
+              onChange={onChangeHandler}
               disabled={disabledNoteFields ? true : false}
             />
           </form>
         </Col>
         <NoteNav
           category={category}
-          categoryChange={categoryChange}
           id={id}
           disabledNoteFields={disabledNoteFields}
           setDisabledNoteFields={setDisabledNoteFields}
-          deleteNote={deleteNote}
         />
       </Row>
     </Col>

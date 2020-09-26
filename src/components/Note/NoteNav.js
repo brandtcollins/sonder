@@ -1,31 +1,29 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Col, OverlayTrigger, Popover } from "react-bootstrap";
 import Tooltip from "react-bootstrap/Tooltip";
 import styles from "./Note.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { NoteContext } from "../../context/NoteContext";
 let _ = require("lodash");
 
 const NoteNav = (props) => {
-  const {
-    disabledNoteFields,
-    setDisabledNoteFields,
-    category,
-    id,
-    deleteNote,
-    categoryChange,
-  } = props;
+  const { state, dispatch } = useContext(NoteContext);
+  const { disabledNoteFields, setDisabledNoteFields, category, id } = props;
 
   const [value, setValue] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
     setValue("");
-    categoryChange(_.startCase(_.toLower(value)));
+    dispatch({
+      type: "noteCategoryChange",
+      payload: _.startCase(_.toLower(value)),
+    });
     document.body.click();
   };
 
-  const handleDelete = () => {
-    deleteNote(id);
+  const handleDelete = (id) => {
+    dispatch({ type: "deleteNote", payload: id });
     document.body.click();
   };
 

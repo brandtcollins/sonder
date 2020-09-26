@@ -8,7 +8,6 @@ function Categories(props) {
   const { notes } = noteContext.state;
   let uniqid = require("uniqid");
   let categoryList = [];
-  console.log(noteContext.state);
 
   notes.map((noteItem) => {
     if (categoryList.find((category) => category.name === noteItem.category)) {
