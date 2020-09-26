@@ -50,7 +50,6 @@ const reducer = (state, action) => {
         if (deletedNoteIndex === 0 && categoryArr.length > 1) {
           newNote = categoryArr[deletedNoteIndex + 1].id;
         } else if (deletedNoteIndex === 0 && categoryArr.length <= 1) {
-          console.log(state.blankNote);
           newNote = state.blankNote.id;
         } else {
           newNote = categoryArr[deletedNoteIndex - 1].id;

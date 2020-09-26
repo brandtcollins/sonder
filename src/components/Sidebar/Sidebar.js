@@ -9,7 +9,6 @@ const Sidebar = (props) => {
 
   const handleClick = (event) => {
     let parent = event.target.closest("li").getAttribute("name");
-    console.log(event.target);
     setCategory(parent);
   };
 
