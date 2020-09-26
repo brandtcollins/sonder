@@ -29,54 +29,36 @@ export const NoteContext = React.createContext(initialState);
 
 const reducer = (state, action) => {
   const { payload } = action;
-  const { id, title, content, icon, category } = action.payload;
   switch (action.type) {
     case "loadLocalStorage":
       return produce(state, (draft) => {
         draft.notes = payload;
       });
     case "createNewNote":
-      return {
-        ...state,
-        notes: [
-          ...state.notes,
-          {
-            id: id,
-            title: title,
-            content: content,
-            icon: icon,
-            category: category,
-          },
-        ],
-      };
+      return produce(state, (draft) => {
+        draft.notes = draft.notes.concat(action.payload);
+      });
     case "deleteNote":
       const categoryArr = state.notes.filter(
         (noteItem) => noteItem.category === state.category
       );
-
       const deletedNoteIndex = categoryArr.findIndex(
         (noteItem) => noteItem.id === state.selectedNoteID
       );
-
-      let testingVar;
-
-      const newNoteToDisplay = () => {
+      let newNote;
+      (() => {
         if (deletedNoteIndex === 0 && categoryArr.length > 1) {
-          console.log(`1st conditional`);
-          testingVar = categoryArr[deletedNoteIndex + 1].id;
+          newNote = categoryArr[deletedNoteIndex + 1].id;
         } else if (deletedNoteIndex === 0 && categoryArr.length <= 1) {
-          console.log(`2nd conditional`);
           console.log(state.blankNote);
-          testingVar = state.blankNote.id;
+          newNote = state.blankNote.id;
         } else {
-          console.log(`3rd conditional`);
-          testingVar = categoryArr[deletedNoteIndex - 1].id;
+          newNote = categoryArr[deletedNoteIndex - 1].id;
         }
-      };
-      newNoteToDisplay();
+      })();
 
       return produce(state, (draft) => {
-        draft.selectedNoteID = testingVar;
+        draft.selectedNoteID = newNote;
         draft.notes = state.notes.filter((noteItem) => noteItem.id !== payload);
       });
     case "selectedNote":
