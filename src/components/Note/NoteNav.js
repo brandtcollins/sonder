@@ -7,7 +7,7 @@ import { NoteContext } from "../../context/NoteContext";
 let _ = require("lodash");
 
 const NoteNav = (props) => {
-  const { state, dispatch } = useContext(NoteContext);
+  const { dispatch } = useContext(NoteContext);
   const { disabledNoteFields, setDisabledNoteFields, category, id } = props;
 
   const [value, setValue] = useState("");

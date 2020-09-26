@@ -4,9 +4,9 @@ import { NoteContext } from "../../../context/NoteContext";
 
 function Categories(props) {
   const noteContext = useContext(NoteContext);
+  const { state } = noteContext;
+  const { notes, category } = state;
   const { handleClick } = props;
-  const { notes } = noteContext.state;
-  let uniqid = require("uniqid");
   let categoryList = [];
 
   notes.map((noteItem) => {
@@ -30,7 +30,8 @@ function Categories(props) {
       <SidebarLink
         click={handleClick}
         category={item.name}
-        key={uniqid()}
+        active={category === item.name ? true : false}
+        key={item.name}
         icon={item.icon}
         name={item.name}
         count={item.count}

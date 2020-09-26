@@ -18,15 +18,15 @@ function App() {
   const { state, dispatch } = noteContext;
 
   useEffect(() => {
-    const data = localStorage.getItem("notes");
+    const data = localStorage.getItem("state");
     if (data) {
       dispatch({ type: "loadLocalStorage", payload: JSON.parse(data) });
     }
   }, [dispatch]);
 
   useEffect(() => {
-    localStorage.setItem("notes", JSON.stringify(state.notes));
-  });
+    localStorage.setItem("state", JSON.stringify(state));
+  }, [state]);
 
   const searchNotes = () => {
     const noteIndex =
@@ -35,7 +35,6 @@ function App() {
         : state.notes.findIndex(
             (noteItem) => noteItem.id === state.selectedNoteID
           );
-
     dispatch({
       type: "foundNoteIndex",
       payload: noteIndex,

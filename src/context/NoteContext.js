@@ -33,7 +33,8 @@ const reducer = (state, action) => {
   switch (action.type) {
     case "loadLocalStorage":
       return produce(state, (draft) => {
-        draft.notes = payload;
+        draft.notes = payload.notes;
+        draft.category = payload.category;
       });
     case "createNewNote":
       return produce(state, (draft) => {

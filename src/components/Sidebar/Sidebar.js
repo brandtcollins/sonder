@@ -5,7 +5,7 @@ import { Row, Col } from "react-bootstrap";
 import styles from "./Sidebar.module.css";
 import { NoteContext } from "../../context/NoteContext";
 
-const Sidebar = (props) => {
+const Sidebar = () => {
   const noteContext = useContext(NoteContext);
   const { dispatch } = noteContext;
 
