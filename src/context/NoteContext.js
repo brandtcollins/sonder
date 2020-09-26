@@ -5,6 +5,7 @@ const initialState = {
   notes: [
     {
       id: 123,
+      time: Date.now(),
       category: "General",
       icon: "fa-briefcase",
       title: "This is the first note, click to open and edit your note",

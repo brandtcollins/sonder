@@ -3,10 +3,10 @@ import styles from "../NoteList.module.css";
 import { Col, Row } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import iconFinder from "../../../utils/iconFinder/iconFinder";
+import timeSince from "../../../utils/timeSince/timeSince";
 
 const ListItem = (props) => {
-  const { active, id, icon, click, title, content } = props;
-
+  const { active, id, icon, click, title, content, time } = props;
   return (
     <Col
       className={
@@ -17,9 +17,7 @@ const ListItem = (props) => {
       <Row>
         <Col onClick={click} id={id} className={styles.noteCategory} xs={2}>
           <p>
-            Just
-            <br />
-            Now
+            {timeSince(time)}
             <br />
             <FontAwesomeIcon icon={iconFinder(icon)} />
           </p>

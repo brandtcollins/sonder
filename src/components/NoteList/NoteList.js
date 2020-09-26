@@ -21,6 +21,7 @@ const NoteList = (props) => {
 
   const [newNote, setNewNote] = useState({
     id: uniqid(),
+    time: Date.now(),
     category: category,
     icon: "fa-paw",
     title: titleGenerator(),
@@ -36,6 +37,7 @@ const NoteList = (props) => {
   const categoryChange = () => {
     setNewNote({
       id: uniqid(),
+      time: Date.now(),
       category: category,
       icon: "fa-paw",
       title: titleGenerator(),

@@ -8,36 +8,10 @@ import "./App.css";
 import { NoteContext } from "../context/NoteContext";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
-import {
-  faBriefcase,
-  faHashtag,
-  faHeart,
-  faCode,
-  faPaintBrush,
-  faMusic,
-  faHome,
-  faPaw,
-  faEdit,
-  faTag,
-  faSave,
-  faTrash,
-} from "@fortawesome/free-solid-svg-icons";
-
-library.add(
-  fab,
-  faBriefcase,
-  faHashtag,
-  faHeart,
-  faCode,
-  faPaintBrush,
-  faMusic,
-  faHome,
-  faPaw,
-  faEdit,
-  faTag,
-  faSave,
-  faTrash
-);
+// prettier-ignore
+import {faBriefcase,faHashtag,faHeart,faCode,faPaintBrush,faMusic,faHome,faPaw,faEdit,faTag,faSave,faTrash,} from "@fortawesome/free-solid-svg-icons";
+// prettier-ignore
+library.add(fab,faBriefcase,faHashtag,faHeart,faCode,faPaintBrush,faMusic,faHome,faPaw,faEdit,faTag,faSave,faTrash);
 
 function App() {
   const noteContext = useContext(NoteContext);
