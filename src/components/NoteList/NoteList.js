@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./NoteList.module.css";
 import ListItem from "./NoteListItem/NoteListItem";
 import { Col } from "react-bootstrap";
@@ -6,17 +6,13 @@ import RoundButton from "../Button/Button";
 import quoteGenerator from "../../utils/quoteGenerator/quoteGenerator";
 import titleGenerator from "../../utils/titleGenerator/titleGenerator";
 import EmptyListItem from "./NoteListItem/EmptyListItem";
+import { NoteContext } from "../../context/NoteContext";
 
 let uniqid = require("uniqid");
 
 const NoteList = (props) => {
-  const {
-    notes,
-    category,
-    createNote,
-    setSelectedNote,
-    selectedNoteID,
-  } = props;
+  const { state, dispatch } = useContext(NoteContext);
+  const { notes, category, selectedNoteID } = state;
   let filteredList;
 
   const [newNote, setNewNote] = useState({
@@ -29,7 +25,7 @@ const NoteList = (props) => {
   });
 
   const submitNote = (event) => {
-    createNote(newNote);
+    dispatch({ type: "createNewNote", payload: newNote });
     categoryChange();
     event.preventDefault();
   };
@@ -48,7 +44,7 @@ const NoteList = (props) => {
   useEffect(categoryChange, [category]);
 
   const handleClick = (item) => {
-    setSelectedNote(item);
+    dispatch({ type: "selectedNote", payload: item.id });
   };
 
   const listGenerator = () => {

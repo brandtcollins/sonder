@@ -56,17 +56,7 @@ function App() {
     <Container fluid>
       <Row>
         <Sidebar />
-        <NoteList
-          createNote={(newNote) =>
-            dispatch({ type: "createNewNote", payload: newNote })
-          }
-          notes={state.notes}
-          category={state.category}
-          selectedNoteID={state.selectedNoteID}
-          setSelectedNote={(listItem) =>
-            dispatch({ type: "selectedNote", payload: listItem.id })
-          }
-        />
+        <NoteList />
         <Note
           inputChange={(event) =>
             dispatch({ type: "inputChange", payload: event.target })
