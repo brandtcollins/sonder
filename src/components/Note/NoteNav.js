@@ -21,6 +21,12 @@ const NoteNav = (props) => {
     event.preventDefault();
     setValue("");
     categoryChange(_.startCase(_.toLower(value)));
+    document.body.click();
+  };
+
+  const handleDelete = () => {
+    deleteNote(id);
+    document.body.click();
   };
 
   const handleClick = (event) => {
@@ -68,7 +74,7 @@ const NoteNav = (props) => {
     <Popover id="popover-basic">
       <Popover.Title as="h3">Are you sure you want to delete?</Popover.Title>
       <Popover.Content>
-        <button className={styles.button} onClick={() => deleteNote(id)}>
+        <button className={styles.button} onClick={() => handleDelete(id)}>
           Yes, delete this note.
         </button>
       </Popover.Content>
