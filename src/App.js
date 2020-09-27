@@ -1,11 +1,12 @@
 import React, { useContext, useEffect } from "react";
-import Sidebar from "../components/Sidebar/Sidebar";
 import { Container, Row } from "react-bootstrap";
-import NoteList from "../components/NoteList/NoteList";
-import Note from "../components/Note/Note";
+import Sidebar from "./components/Sidebar/Sidebar";
+import Modal from "./components/UI/Modal/Modal";
+import NoteList from "./components/NoteList/NoteList";
+import Note from "./components/Note/Note";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import { NoteContext } from "../context/NoteContext";
+import { NoteContext } from "./context/NoteContext";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 // prettier-ignore
@@ -54,6 +55,7 @@ function App() {
   return (
     <Container fluid>
       <Row>
+        <Modal />
         <Sidebar />
         <NoteList />
         <Note />
