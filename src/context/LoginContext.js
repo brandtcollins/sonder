@@ -1,11 +1,17 @@
 import React, { createContext, useState } from "react";
 
-export const LoginContext = createContext();
+const initialState = {
+  modal: false,
+  signIn: false,
+  register: false,
+};
+
+export const LoginContext = createContext(initialState);
 
 const LoginContextProvider = (props) => {
-  const [modal, setModal] = useState(false);
+  const [state, setState] = useState(initialState);
   return (
-    <LoginContext.Provider value={{ modal: modal, setModal: setModal }}>
+    <LoginContext.Provider value={{ state: state, setState: setState }}>
       {props.children}
     </LoginContext.Provider>
   );

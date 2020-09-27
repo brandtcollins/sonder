@@ -10,7 +10,7 @@ const Sidebar = () => {
   const noteContext = useContext(NoteContext);
   const { dispatch } = noteContext;
   const loginContext = useContext(LoginContext);
-  const { modal, setModal } = loginContext;
+  const { state, setState } = loginContext;
 
   const handleClick = (event) => {
     let parent = event.target.closest("li").getAttribute("name");
@@ -18,8 +18,9 @@ const Sidebar = () => {
   };
 
   const handleButtonClick = (event) => {
-    setModal(!modal);
-    console.log(`button clicked`);
+    const { name } = event.target;
+    setState({ ...state, modal: !state.modal, [name]: !state[name] });
+    console.log(event.target.name);
   };
 
   return (
@@ -29,8 +30,12 @@ const Sidebar = () => {
         <Categories handleClick={handleClick} />
       </Row>
       <Row className={styles.footer}>
-        <button onClick={handleButtonClick}>Signup</button>
-        <button onClick={handleButtonClick}>Login</button>
+        <button onClick={handleButtonClick} name="signIn">
+          Sign In
+        </button>
+        <button onClick={handleButtonClick} name="register">
+          Register
+        </button>
       </Row>
     </Col>
   );

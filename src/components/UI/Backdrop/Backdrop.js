@@ -4,10 +4,10 @@ import { LoginContext } from "../../../context/LoginContext";
 
 const Backdrop = (props) => {
   const loginContext = useContext(LoginContext);
-  const { setModal } = loginContext;
+  const { state, setState } = loginContext;
 
   const handleClick = (params) => {
-    setModal(false);
+    setState({ ...state, modal: false, signIn: false, register: false });
   };
   return props.show ? (
     <div className={styles.Backdrop} onClick={handleClick}></div>

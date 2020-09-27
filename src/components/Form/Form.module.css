@@ -1,0 +1,37 @@
+.FormSwitcher {
+  display: flex;
+  padding: 0;
+}
+
+.FormSwitcher button {
+  border: none;
+  color: #b0b2b2;
+  display: flex;
+  /* flex-direction: column; */
+  background-color: #edf2f4;
+  border-bottom: 1px solid #c9d0d2;
+  padding: 25px 0;
+  width: 50%;
+  transition: 0.25s background-color ease-in-out;
+  transition: 0.25s color ease-in-out;
+}
+
+.FormSwitcher button:first-child {
+  border-right: 1px solid #c9d0d2;
+}
+
+.FormSwitcher button.active {
+  background-color: white;
+  color: #ef233c;
+  border-bottom: none;
+  transition: 0.25s background-color ease-in-out;
+  transition: 0.25s color ease-in-out;
+}
+
+.FormSwitcher button:focus {
+  outline: none;
+}
+
+.FormSwitcher span {
+  margin: 0 auto;
+}
