@@ -2,7 +2,6 @@ import React, { Fragment, useContext } from "react";
 import Backdrop from "../Backdrop/Backdrop";
 import styles from "./Modal.module.css";
 import { LoginContext } from "../../../context/LoginContext";
-import Avatar from "../../Avatar/Avatar";
 import FormSwitcher from "../../Form/FormSwitcher";
 import Forms from "../../Form/Forms/Forms";
 
@@ -20,7 +19,6 @@ const Modal = (props) => {
         }}
       >
         <FormSwitcher />
-        <Avatar />
         <Forms />
       </div>
     </Fragment>
