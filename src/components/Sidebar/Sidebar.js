@@ -25,7 +25,9 @@ const Sidebar = () => {
 
   return (
     <Col xs={2} className={styles.sidebar}>
-      <Avatar />
+      <div className={styles.avatar}>
+        <Avatar />
+      </div>
       <Row className={styles.row}>
         <Categories handleClick={handleClick} />
       </Row>

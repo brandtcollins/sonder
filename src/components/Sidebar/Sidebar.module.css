@@ -4,6 +4,15 @@
   height: 100vh;
 }
 
+.sidebar .avatar {
+  margin: 4rem auto;
+  width: 100%;
+}
+
+.sidebar .avatar img {
+  margin: 0 auto;
+}
+
 .sidebar p {
   font-family: "Barlow";
   font-size: 0.75rem;
