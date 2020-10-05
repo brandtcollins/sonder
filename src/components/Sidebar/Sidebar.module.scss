@@ -102,26 +102,25 @@
 }
 
 @media only screen and (max-width: 725px) {
-  .sidebar .row p {
+  .sidebar {
     display: none;
+    .row {
+      padding: 0 0 3rem 0;
+      ul {
+        width: 100%;
+        li {
+          font-size: 2rem;
+          margin: 0 auto;
+          padding: 0.5rem 0;
+          width: 80px;
+          text-align: center;
+        }
+      }
+      p {
+        display: none;
+      }
+    }
   }
-
-  .sidebar .row ul {
-    width: 100%;
-  }
-
-  .sidebar .row ul li {
-    font-size: 2rem;
-    margin: 0 auto;
-    padding: 0.5rem 0;
-    width: 80px;
-    text-align: center;
-  }
-
-  .sidebar .row {
-    padding: 0 0 3rem 0;
-  }
-
   ul li a {
     display: none;
   }

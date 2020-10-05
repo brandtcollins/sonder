@@ -10,9 +10,10 @@ import { NoteContext } from "./context/NoteContext";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 // prettier-ignore
-import {faBriefcase,faHashtag,faHeart,faCode,faPaintBrush,faMusic,faHome,faPaw,faEdit,faTag,faSave,faTrash,} from "@fortawesome/free-solid-svg-icons";
+import {faBars, faBriefcase,faHashtag,faHeart,faCode,faPaintBrush,faMusic,faHome,faPaw,faEdit,faTag,faSave,faTrash,} from "@fortawesome/free-solid-svg-icons";
+import MobileHeader from "./components/MobileHeader/MobileHeader";
 // prettier-ignore
-library.add(fab,faBriefcase,faHashtag,faHeart,faCode,faPaintBrush,faMusic,faHome,faPaw,faEdit,faTag,faSave,faTrash);
+library.add(fab,faBars, faBriefcase,faHashtag,faHeart,faCode,faPaintBrush,faMusic,faHome,faPaw,faEdit,faTag,faSave,faTrash);
 
 function App() {
   const noteContext = useContext(NoteContext);
@@ -56,6 +57,7 @@ function App() {
     <Container fluid>
       <Row>
         <Modal />
+        <MobileHeader />
         <Sidebar />
         <NoteList />
         <Note />
