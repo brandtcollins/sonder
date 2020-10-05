@@ -40,7 +40,7 @@ const NoteNav = (props) => {
   );
   const editCategory = (props) => (
     <Tooltip id="button-tooltip" {...props}>
-      Edit Category
+      Change Category
     </Tooltip>
   );
   const deleteNoteTooltip = (props) => (
@@ -51,7 +51,7 @@ const NoteNav = (props) => {
 
   const categoryPopover = (
     <Popover id="popover-basic">
-      <Popover.Title as="h3">Enter Note Category</Popover.Title>
+      <Popover.Title as="h3">Change Category</Popover.Title>
       <Popover.Content>
         <form onSubmit={handleSubmit}>
           <input

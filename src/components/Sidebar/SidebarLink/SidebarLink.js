@@ -1,7 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import iconFinder from "../../../utils/iconFinder/iconFinder";
-import styles from "../Sidebar.module.css";
+import styles from "../Sidebar.module.scss";
 
 const SidebarLink = (props) => {
   const { click, category, name, count, active } = props;
