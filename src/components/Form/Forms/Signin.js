@@ -3,7 +3,6 @@ import Button from "../../Button/Button";
 import styles from "../Form.module.css";
 import Avatar from "../../Avatar/Avatar";
 import fire from "../../../firebase";
-import { LogIn } from "../../../utils/LogIn/LogIn";
 
 const SignIn = () => {
   const [credentials, setCredentials] = useState({

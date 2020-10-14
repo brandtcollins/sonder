@@ -12,11 +12,13 @@ export const LoginContext = createContext(initialState);
 const LoginContextProvider = (props) => {
   const [state, setState] = useState(initialState);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     fire.auth().onAuthStateChanged((user) => {
       if (user) {
         setLoggedIn(true);
+        setUser(user);
         setState({ ...state, modal: false });
       } else {
         setLoggedIn(false);
@@ -31,6 +33,7 @@ const LoginContextProvider = (props) => {
         setState: setState,
         loggedIn: loggedIn,
         setLoggedIn: setLoggedIn,
+        user: user,
       }}
     >
       {props.children}

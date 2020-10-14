@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styles from "../Form.module.css";
 import Avatar from "../../Avatar/Avatar";
 import Button from "../../Button/Button";
-import { LogIn } from "../../../utils/LogIn/LogIn";
 import fire from "../../../firebase";
 
 const SignIn = () => {

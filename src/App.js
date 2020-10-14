@@ -9,7 +9,6 @@ import "./App.css";
 import { NoteContext } from "./context/NoteContext";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
-import fire from "./firebase";
 
 // prettier-ignore
 import {faBars, faBriefcase,faHashtag,faHeart,faCode,faPaintBrush,faMusic,faHome,faPaw,faEdit,faTag,faSave,faTrash,} from "@fortawesome/free-solid-svg-icons";
